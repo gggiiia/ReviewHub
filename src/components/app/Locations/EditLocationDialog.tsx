@@ -1,19 +1,19 @@
 import {ReactNode, useEffect, useState} from "react"
 import {useForm} from "react-hook-form"
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger
 } from "@/components/ui/dialog.tsx"
 import {Button} from "@/components/ui/button.tsx"
 import {Input} from "@/components/ui/input.tsx"
 import {TypographyP} from "@/components/ui/Typography.tsx"
 import {ImageInput} from "@/components/ui/image-input.tsx"
-import type { LocationItem } from "@/components/app/Locations/LocationCard.tsx"
+import type {LocationItem} from "@/components/app/Locations/LocationCard.tsx"
 
 export interface EditLocationData {
   name: string

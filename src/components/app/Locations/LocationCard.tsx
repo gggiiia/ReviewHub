@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button.tsx"
 import { Trash2, Pencil } from "lucide-react"
 import { DeleteConfirmDialog } from "@/components/ui/DeleteConfirmDialog.tsx"
 import { EditLocationDialog } from "@/components/app/Locations/EditLocationDialog.tsx"
+import {useLocations} from "@/services/LocationsService.ts";
 
 export interface LocationItem {
   id: string
@@ -18,8 +19,14 @@ interface LocationCardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function LocationCard({ location, className, onEdit, onDelete, ...props }: LocationCardProps) {
-  return (
-    <div className={cn("border rounded-md p-3 flex items-center gap-3 hover:bg-accent/40 transition-colors", className)} {...props}>
+
+    const {selectedLocation} = useLocations()
+
+    const isSelected = selectedLocation.id === location.id
+    const isSelectedClass = isSelected ? "shadow-xl border border-black" : ""
+
+    return (
+    <div className={cn("border rounded-md p-3 flex items-center gap-3 hover:bg-accent/40 transition-colors",isSelectedClass, className)} {...props}>
       <img
         src={location.avatarUrl}
         alt={location.name}
@@ -43,9 +50,12 @@ export function LocationCard({ location, className, onEdit, onDelete, ...props }
           cancelText="Cancel"
           onConfirm={() => onDelete?.(location)}
         >
-          <Button type="button" variant="ghost" size="sm" aria-label="Delete location">
-            <Trash2 className="size-4 text-destructive" />
-          </Button>
+            {
+                !isSelected &&
+                <Button type="button" variant="ghost" size="sm" aria-label="Delete location">
+                    <Trash2 className="size-4 text-destructive" />
+                </Button>
+            }
         </DeleteConfirmDialog>
       </div>
     </div>

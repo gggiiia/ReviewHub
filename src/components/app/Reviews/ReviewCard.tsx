@@ -2,6 +2,7 @@ import {TypographyP} from "@/components/ui/Typography.tsx"
 import {MessageSquare, Share2, Star} from "lucide-react"
 import {Button} from "@/components/ui/button.tsx"
 import {ReplyDialog} from "@/components/app/Reviews/ReplyDialog.tsx"
+import {ShareDialog} from "@/components/app/Reviews/ShareDialog.tsx"
 
 export interface ReviewItem {
   id: string
@@ -54,7 +55,7 @@ function SourceBadge({ source }: { source: "google" | "facebook" }) {
   )
 }
 
-export function ReviewCard({ review, onShare, onReplySubmit }: ReviewCardProps) {
+export function ReviewCard({ review, onReplySubmit }: ReviewCardProps) {
   const hasReply = !!(review.reply && review.reply.trim().length > 0)
 
   return (
@@ -91,10 +92,19 @@ export function ReviewCard({ review, onShare, onReplySubmit }: ReviewCardProps) 
           ) : null}
 
           <div className="mt-3 flex items-center gap-2 justify-end">
-            <Button variant="ghost" size="sm" onClick={() => onShare?.(review)}>
-              <Share2 className="size-4" />
-              Share
-            </Button>
+            <ShareDialog
+              review={{
+                author: review.author,
+                rating: review.rating,
+                date: review.date,
+                text: review.text?.trim().length ? review.text : "the review is empty",
+              }}
+            >
+              <Button variant="ghost" size="sm">
+                <Share2 className="size-4" />
+                Share
+              </Button>
+            </ShareDialog>
             {!hasReply && (
               <ReplyDialog review={review} onSubmit={onReplySubmit}>
                 <Button size="sm">

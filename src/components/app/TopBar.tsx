@@ -1,33 +1,48 @@
 import {Card} from "@/components/ui/card.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
-import {useState} from "react";
 import {Link, useLocation} from "react-router";
 import {useTopBar} from "@/services/TopBarService.tsx";
+import {fakeLocations, locationsActions, useLocations} from "@/services/LocationsService.ts";
 
 
 function BusinessSelect() {
-    const [currentValue, setCurrentValue] = useState<string | undefined>(undefined)
-    const options = [
-        { label: "Home Base", value: "home" },
-        { label: "Location #2", value: "loc2" },
-        { label: "Location #3", value: "loc3" },
-    ]
+    const {selectedLocation} = useLocations()
+    const options = fakeLocations
 
-    const selectedOption = options.find(o => o.value === currentValue)
-    const initial = (selectedOption?.label || selectedOption?.value || "").trim().charAt(0).toUpperCase() || "?"
+    function setCurrentValue(v) {
+        locationsActions.setSelectedLocation(fakeLocations.find(({id}) => id === v) || fakeLocations[0])
+    }
 
-    return <Select value={currentValue} onValueChange={setCurrentValue}>
+    const initial = (selectedLocation?.name || selectedLocation?.id || "").trim().charAt(0).toUpperCase() || "?"
+
+    return <Select value={selectedLocation.id} onValueChange={setCurrentValue}>
         <SelectTrigger className="w-[280px]">
-            <div className={'aspect-square w-6 bg-gray-300 rounded flex items-center justify-center font-medium'}>
-                {initial}
-            </div>
-            <SelectValue placeholder="Select a location" />
+            <SelectValue placeholder="Select a location"/>
         </SelectTrigger>
         <SelectContent>
             <SelectGroup>
                 {options.map(opt => (
-                    <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                    <SelectItem key={opt.id} value={opt.id}>
+                        <div className={"flex items-center gap-2"}>
+                            {
+                                !opt.avatarUrl &&
+                                <div
+                                    className={'aspect-square w-6 bg-gray-300 rounded flex items-center justify-center font-medium'}>
+                                    {initial}
+                                </div>
+                            }
+                            {
+                                opt.avatarUrl &&
+                                <img
+                                    className={'aspect-square w-6 bg-gray-300 rounded flex items-center justify-center font-medium'}
+                                    src={opt.avatarUrl} alt=""/>
+                            }
+
+                            {opt.name}
+                        </div>
+                    </SelectItem>
+
                 ))}
             </SelectGroup>
         </SelectContent>
@@ -39,13 +54,13 @@ interface TopBarNavLinkProps {
     label: string;
 }
 
-function TopBarNavLink(props:TopBarNavLinkProps) {
+function TopBarNavLink(props: TopBarNavLinkProps) {
 
     const location = useLocation()
     const isSelected = location.pathname === props.path
 
     return <Link to={props.path}>
-        <Button variant={"ghost"} className={isSelected ? 'bg-accent' : "" }>
+        <Button variant={"ghost"} className={isSelected ? 'bg-accent' : ""}>
             {props.label}
         </Button>
     </Link>
@@ -53,7 +68,7 @@ function TopBarNavLink(props:TopBarNavLinkProps) {
 
 export function TopBar() {
 
-     const {routes} = useTopBar()
+    const {routes} = useTopBar()
 
     return <Card className={'p-2 2xl:px-24 overflow-visible fixed w-full'}>
         <div className={'flex gap-4 items-center p-2'}>

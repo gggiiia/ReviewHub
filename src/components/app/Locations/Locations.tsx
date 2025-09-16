@@ -6,22 +6,14 @@ import {Button} from "@/components/ui/button.tsx";
 import {CreateLocationDialog, type NewLocationData} from "@/components/app/Locations/CreateLocationDialog.tsx";
 import {useState} from "react";
 import { Plus } from "lucide-react";
+import {fakeLocations} from "@/services/LocationsService.ts";
 
-function makeLocations(count: number): LocationItem[] {
-    return Array.from({ length: count }).map((_, i) => {
-        const name = faker.company.name();
-        return {
-            id: `loc-${i + 1}`,
-            name,
-            avatarUrl: faker.image.avatarGitHub(),
-        };
-    });
-}
 
-const initialLocations: LocationItem[] = makeLocations(12);
+
+
 
 export function Locations() {
-    const [locations, setLocations] = useState<LocationItem[]>(initialLocations)
+    const [locations, setLocations] = useState<LocationItem[]>(fakeLocations)
 
     function handleCreate(data: NewLocationData) {
         const newLoc: LocationItem = {
