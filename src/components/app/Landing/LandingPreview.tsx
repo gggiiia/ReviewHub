@@ -70,7 +70,7 @@ export function LandingPreview() {
 
     return (
         <div className="w-full h-full flex items-center justify-center p-4">
-            <div className="w-full max-w-[640px] bg-white rounded-lg p-6 shadow">
+            <div className="w-full max-w-[640px] bg-white rounded-lg p-6">
                 {step === "rate" && (
                     <div className="text-center">
                         {/* Business logo and name header */}
@@ -191,7 +191,7 @@ export function LandingPreview() {
                                     {errors.message && <div className="text-destructive text-sm mt-1">{errors.message.message}</div>}
                                 </div>
                                 <div className="flex gap-3 justify-between">
-                                    <Button type="button" variant="ghost" onClick={() => setStep("rate")}>Cancel</Button>
+                                    <Button type="button" variant="ghost" onClick={() => setStep("rate")}>Go back</Button>
                                     <Button type="submit">Send private review</Button>
                                 </div>
                             </div>

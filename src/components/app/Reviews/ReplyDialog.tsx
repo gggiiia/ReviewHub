@@ -141,7 +141,7 @@ export function ReplyDialog({review, children, onSubmit, title = "Reply to revie
 
                     <DialogFooter>
                         <Button type="button" className={"mr-auto"} variant="ghost" onClick={() => setOpen(false)}
-                                disabled={isSubmitting}>Cancel</Button>
+                                disabled={isSubmitting}>Close</Button>
                         <Button type="button" variant="outline" onClick={generateAiReply}
                                 disabled={aiLoading || isSubmitting}>
                             {aiLoading ? "Generating..." : "Reply with AI"}
