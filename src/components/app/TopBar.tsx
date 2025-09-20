@@ -3,18 +3,19 @@ import {Button} from "@/components/ui/button.tsx";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {Link, useLocation} from "react-router";
 import {useTopBar} from "@/services/TopBarService.tsx";
-import {fakeLocations, locationsActions, useLocations} from "@/services/LocationsService.ts";
+import {locationsActions, useLocations} from "@/services/LocationsService.ts";
 
 
 function BusinessSelect() {
-    const {selectedLocation} = useLocations()
-    const options = fakeLocations
+    const { selectedLocation, locations } = useLocations()
+    const options = locations
 
-    function setCurrentValue(v) {
-        locationsActions.setSelectedLocation(fakeLocations.find(({id}) => id === v) || fakeLocations[0])
+    function setCurrentValue(v: string) {
+        const found = options.find(({ id }) => id === v) || options[0]
+        if (found) {
+            locationsActions.setSelectedLocation(found)
+        }
     }
-
-    const initial = (selectedLocation?.name || selectedLocation?.id || "").trim().charAt(0).toUpperCase() || "?"
 
     return <Select value={selectedLocation.id} onValueChange={setCurrentValue}>
         <SelectTrigger className="w-[280px]">
@@ -22,28 +23,30 @@ function BusinessSelect() {
         </SelectTrigger>
         <SelectContent>
             <SelectGroup>
-                {options.map(opt => (
-                    <SelectItem key={opt.id} value={opt.id}>
-                        <div className={"flex items-center gap-2"}>
-                            {
-                                !opt.avatarUrl &&
-                                <div
-                                    className={'aspect-square w-6 bg-gray-300 rounded flex items-center justify-center font-medium'}>
-                                    {initial}
-                                </div>
-                            }
-                            {
-                                opt.avatarUrl &&
-                                <img
-                                    className={'aspect-square w-6 bg-gray-300 rounded flex items-center justify-center font-medium'}
-                                    src={opt.avatarUrl} alt=""/>
-                            }
+                {options.map(opt => {
+                    const initial = (opt.name || opt.id || "").trim().charAt(0).toUpperCase() || "?"
+                    return (
+                        <SelectItem key={opt.id} value={opt.id}>
+                            <div className={"flex items-center gap-2"}>
+                                {
+                                    !opt.avatarUrl &&
+                                    <div
+                                        className={'aspect-square w-6 bg-gray-300 rounded flex items-center justify-center font-medium'}>
+                                        {initial}
+                                    </div>
+                                }
+                                {
+                                    opt.avatarUrl &&
+                                    <img
+                                        className={'aspect-square w-6 bg-gray-300 rounded flex items-center justify-center font-medium'}
+                                        src={opt.avatarUrl} alt=""/>
+                                }
 
-                            {opt.name}
-                        </div>
-                    </SelectItem>
-
-                ))}
+                                {opt.name}
+                            </div>
+                        </SelectItem>
+                    )
+                })}
             </SelectGroup>
         </SelectContent>
     </Select>

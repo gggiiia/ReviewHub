@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo, useState } from "react"
 import {cn} from "@/lib/utils.ts"
 import { Button } from "@/components/ui/button.tsx"
 import { Trash2, Pencil } from "lucide-react"
@@ -23,19 +23,41 @@ export function LocationCard({ location, className, onEdit, onDelete, ...props }
     const {selectedLocation} = useLocations()
 
     const isSelected = selectedLocation.id === location.id
-    const isSelectedClass = isSelected ? "shadow-xl border border-black" : ""
+    const isSelectedClass = isSelected ? "shadow-xl" : ""
+
+    const [imgError, setImgError] = useState(false)
+    const avatarUrl = location.avatarUrl?.trim() || ""
+    const showImage = !!avatarUrl && !imgError
+    const initial = location.name[0]
 
     return (
     <div className={cn("border rounded-md p-3 flex items-center gap-3 hover:bg-accent/40 transition-colors",isSelectedClass, className)} {...props}>
-      <img
-        src={location.avatarUrl}
-        alt={location.name}
-        className="size-12 rounded object-cover bg-muted"
-        loading="lazy"
-      />
+      {showImage ? (
+        <img
+          src={avatarUrl}
+          alt={location.name}
+          className="size-12 rounded object-cover bg-muted"
+          loading="lazy"
+          onError={() => setImgError(true)}
+        />
+      ) : (
+        <div
+          className="size-12 rounded bg-muted text-muted-foreground flex items-center justify-center font-semibold select-none"
+          aria-label={`placeholder for ${location.name}`}
+        >
+          {initial}
+        </div>
+      )}
       <div className="min-w-0 flex-1">
         <div className="font-medium truncate">{location.name}</div>
+          {
+              isSelected &&
+              <div className={cn("bg-green-500 rounded-2xl w-fit px-1 py-0.5 text-xs font-bold text-white")}>
+                  Active
+              </div>
+          }
       </div>
+
       <div className="flex items-center gap-2 ml-auto">
         <EditLocationDialog location={location} onSubmit={(updated) => onEdit?.(updated)}>
           <Button type="button" variant="outline" size="sm" aria-label="Edit location">

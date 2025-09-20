@@ -92,19 +92,21 @@ export function ReviewCard({ review, onReplySubmit }: ReviewCardProps) {
           ) : null}
 
           <div className="mt-3 flex items-center gap-2 justify-end">
-            <ShareDialog
-              review={{
-                author: review.author,
-                rating: review.rating,
-                date: review.date,
-                text: review.text?.trim().length ? review.text : "the review is empty",
-              }}
-            >
-              <Button variant="ghost" size="sm">
-                <Share2 className="size-4" />
-                Share
-              </Button>
-            </ShareDialog>
+            {review.text && review.text.trim().length > 0 && (
+              <ShareDialog
+                review={{
+                  author: review.author,
+                  rating: review.rating,
+                  date: review.date,
+                  text: review.text,
+                }}
+              >
+                <Button variant="ghost" size="sm">
+                  <Share2 className="size-4" />
+                  Share
+                </Button>
+              </ShareDialog>
+            )}
             {!hasReply && (
               <ReplyDialog review={review} onSubmit={onReplySubmit}>
                 <Button size="sm">

@@ -17,12 +17,28 @@ function makeLocations(count: number): LocationItem[] {
 export const fakeLocations: LocationItem[] = makeLocations(8);
 
 const locationState = proxy({
-    selectedLocation: fakeLocations[0]
+    selectedLocation: fakeLocations[0],
+    locations: fakeLocations,
 })
 
 export const locationsActions = {
     setSelectedLocation: (location: LocationItem) => {
         locationState.selectedLocation = location
+    },
+    createLocation: (newLoc: LocationItem) => {
+        locationState.locations = [newLoc, ...locationState.locations]
+    },
+    updateLocation: (updated: LocationItem) => {
+        locationState.locations = locationState.locations.map(item => item.id === updated.id ? updated : item)
+        if (locationState.selectedLocation?.id === updated.id) {
+            locationState.selectedLocation = updated
+        }
+    },
+    deleteLocation: (toDelete: LocationItem) => {
+        locationState.locations = locationState.locations.filter(item => item.id !== toDelete.id)
+        if (locationState.selectedLocation?.id === toDelete.id) {
+            locationState.selectedLocation = locationState.locations[0] || undefined as any
+        }
     },
 }
 

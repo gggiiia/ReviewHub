@@ -51,21 +51,13 @@ export function Landing() {
             </div>
             <TypographyP className="mb-4">Preview and share your public landing page to collect customer reviews.</TypographyP>
 
-            <Card className="mb-4">
-                <CardHeader className="border-b">
-                    <CardTitle>Landing page preview</CardTitle>
-                    <CardDescription>This is how your customers will experience the review flow.</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <div className="w-full max-w-[640px] mx-auto">
-                        <div className="relative w-full aspect-square overflow-hidden rounded-lg border">
-                            <div className="absolute inset-0 overflow-auto p-0">
-                                <LandingPreview/>
-                            </div>
-                        </div>
+            <div className="w-full max-w-[640px] mx-auto">
+                <div className="relative w-full aspect-square overflow-hidden rounded-lg border">
+                    <div className="absolute inset-0 overflow-auto p-0">
+                        <LandingPreview/>
                     </div>
-                </CardContent>
-            </Card>
+                </div>
+            </div>
         </Page>
     );
 }

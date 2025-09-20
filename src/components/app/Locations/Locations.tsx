@@ -2,18 +2,13 @@ import {Page} from "@/components/app/Page.tsx";
 import {TypographyH2, TypographyP} from "@/components/ui/Typography.tsx";
 import {LocationCard, type LocationItem} from "@/components/app/Locations/LocationCard.tsx";
 import {faker} from "@faker-js/faker";
+import { locationsActions, useLocations } from "@/services/LocationsService.ts";
 import {Button} from "@/components/ui/button.tsx";
 import {CreateLocationDialog, type NewLocationData} from "@/components/app/Locations/CreateLocationDialog.tsx";
-import {useState} from "react";
 import { Plus } from "lucide-react";
-import {fakeLocations} from "@/services/LocationsService.ts";
-
-
-
-
 
 export function Locations() {
-    const [locations, setLocations] = useState<LocationItem[]>(fakeLocations)
+    const { locations } = useLocations()
 
     function handleCreate(data: NewLocationData) {
         const newLoc: LocationItem = {
@@ -21,7 +16,7 @@ export function Locations() {
             name: data.name,
             avatarUrl: data.avatarUrl || faker.image.avatarGitHub(),
         }
-        setLocations((prev) => [newLoc, ...prev])
+        locationsActions.createLocation(newLoc)
     }
 
     return <Page className="p-4 pt-24 lg:w-1/2 lg:ml-[25%]">
@@ -39,10 +34,10 @@ export function Locations() {
                   key={loc.id}
                   location={loc}
                   onEdit={(updated) => {
-                    setLocations(prev => prev.map(item => item.id === updated.id ? updated : item))
+                    locationsActions.updateLocation(updated)
                   }}
                   onDelete={(l) => {
-                    setLocations(prev => prev.filter(item => item.id !== l.id))
+                    locationsActions.deleteLocation(l)
                   }}
                 />
             ))}

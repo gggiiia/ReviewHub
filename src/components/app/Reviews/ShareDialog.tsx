@@ -20,7 +20,6 @@ interface ShareDialogProps {
 
 export function ShareDialog({review, children, title = "Share review"}: ShareDialogProps) {
     const [open, setOpen] = useState(false);
-    const [bgColor, setBgColor] = useState<string>("#0ea5e9");
     const previewRef = useRef<HTMLDivElement | null>(null);
     const [downloading, setDownloading] = useState(false); // reserved for future UI disabled state
 
@@ -65,24 +64,7 @@ export function ShareDialog({review, children, title = "Share review"}: ShareDia
 
                 <div className="flex flex-col items-center gap-3">
                     <div className="w-full" data-share-preview ref={previewRef}>
-                        <SharePreview bgColor={bgColor} review={review}/>
-                    </div>
-
-                    <div className="flex items-center gap-2 w-full max-w-[420px]">
-                        <label className="text-sm font-medium">Background</label>
-                        <input
-                            type="color"
-                            value={bgColor}
-                            onChange={(e) => setBgColor(e.target.value)}
-                            className="h-9 w-9 rounded border p-0"
-                            aria-label="Pick background color"
-                        />
-                        <input
-                            value={bgColor}
-                            onChange={(e) => setBgColor(e.target.value)}
-                            className="flex-1 h-9 rounded border px-2 text-sm"
-                            aria-label="Background color hex"
-                        />
+                        <SharePreview review={review}/>
                     </div>
                 </div>
 

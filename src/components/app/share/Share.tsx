@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Page} from "@/components/app/Page.tsx";
 import {TypographyH2, TypographyP} from "@/components/ui/Typography.tsx";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
@@ -6,11 +6,12 @@ import {Button} from "@/components/ui/button.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {useLocations} from "@/services/LocationsService.ts";
 import {SharePreview} from "@/components/app/share/SharePreview.tsx";
+import { shareActions, useShare } from "@/services/ShareService.ts";
 
 
 export function Share() {
   const { selectedLocation } = useLocations();
-  const [bgColor, setBgColor] = useState<string>("#0ea5e9"); // default brandy blue
+  const { bgColor } = useShare();
 
   const businessName = selectedLocation?.name || "Your Business";
 
@@ -77,10 +78,6 @@ export function Share() {
       <TypographyP className="mb-4">Generate a square image of a single review to share on social media. Pick a background color; text color adjusts automatically for contrast.</TypographyP>
 
       <Card>
-        <CardHeader className="border-b">
-          <CardTitle>Image preview</CardTitle>
-          <CardDescription>Square 1080×1080 single-review image for social sharing. Background color customizable.</CardDescription>
-        </CardHeader>
         <CardContent>
           <div className="flex flex-col max-w-[420px] m-auto gap-4 items-center Create selector">
               <div className="flex flex-col gap-3 w-full">
@@ -89,17 +86,16 @@ export function Share() {
                       <input
                           type="color"
                           value={bgColor}
-                          onChange={(e) => setBgColor(e.target.value)}
+                          onChange={(e) => shareActions.setBgColor(e.target.value)}
                           className="h-10 w-10 rounded border p-0"
                           aria-label="Pick background color"
                       />
-                      <Input value={bgColor} onChange={(e) => setBgColor(e.target.value)} aria-label="Background color hex" />
+                      <Input value={bgColor} onChange={(e) => shareActions.setBgColor(e.target.value)} aria-label="Background color hex" />
                   </div>
               </div>
             {/* Preview area */}
             <div className="w-full" data-share-preview>
               <SharePreview
-                bgColor={bgColor}
                 review={{
                   author: "Alex Johnson",
                   rating: 5,
