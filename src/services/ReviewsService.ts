@@ -37,6 +37,18 @@ const initialReviews: ReviewItem[] = [
   { id: "r5", author: "Emma Wilson", rating: 2, date: "2025-07-20", text: "Not my favorite visit this time. Staff seemed overwhelmed.", source: "google" },
   { id: "r6", author: "Frank Nguyen", rating: 4, date: "2025-07-12", text: "Tasty and consistent. Prices are fair and the ambiance is nice.", reply: "Thanks Frank! We'll keep it up.", source: "facebook" },
   { id: "r7", author: "Grace Hopper", rating: 5, date: "2025-07-01", text: "Exceptional! The team went above and beyond. Will recommend to friends.", source: "google" },
+  // Added more fake reviews below for richer demos
+  { id: "r8", author: "Hannah Kim", rating: 4, date: "2025-09-10", text: "Really good experience. The staff were attentive and the place was clean.", source: "google" },
+  { id: "r9", author: "Ian Thompson", rating: 1, date: "2025-09-05", text: "Disappointed this time. My order was wrong and took a while to fix.", source: "facebook" },
+  { id: "r10", author: "Julia Chen", rating: 5, date: "2025-08-28", text: "Absolutely loved it! Everything was perfect from start to finish.", reply: "Thank you, Julia! We're thrilled you had a great time.", source: "google" },
+  { id: "r11", author: "Kevin Patel", rating: 3, date: "2025-08-18", text: null, source: "facebook" },
+  { id: "r12", author: "Lara O'Connor", rating: 4, date: "2025-08-15", text: "Good value and friendly people. Will come again.", source: "google" },
+  { id: "r13", author: "Marco Rossi", rating: 2, date: "2025-08-09", text: "Service was slow and the table wasn't ready on time.", source: "facebook" },
+  { id: "r14", author: "Nina Berg", rating: 5, date: "2025-07-30", text: "Best spot in town! Highly recommended.", source: "google" },
+  { id: "r15", author: "Owen Wright", rating: 4, date: "2025-07-25", text: "Great atmosphere and good prices.", reply: "Thanks Owen! Appreciate your support.", source: "facebook" },
+  { id: "r16", author: "Priya Singh", rating: 5, date: "2025-07-18", text: "Wonderful service and delicious menu.", source: "google" },
+  { id: "r17", author: "Quentin Dupont", rating: 3, date: "2025-07-11", text: "Average this time; hoping for better next visit.", source: "facebook" },
+  { id: "r18", author: "Riley Adams", rating: 4, date: "2025-07-05", text: "Solid experience overall, would recommend.", source: "google" },
 ];
 
 const reviewsState = proxy({

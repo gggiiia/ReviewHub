@@ -62,9 +62,9 @@ export function SharePreview({ review, className }: SharePreviewProps) {
           </div>
 
           {/* Message bubble */}
-          <div className="relative" style={{ alignSelf: "flex-start" }}>
+          <div className="relative w-full">
             <div
-              className="rounded-2xl px-5 py-4 shadow-md"
+              className="rounded-2xl px-5 py-4 shadow-md w-full"
               style={{ backgroundColor: surface, border: `1px solid ${border}`, backdropFilter: "saturate(120%) blur(0.5px)" as React.CSSProperties["backdropFilter"] }}
             >
               <div className="flex items-center gap-1 mb-2" style={{ color: primary }}>
