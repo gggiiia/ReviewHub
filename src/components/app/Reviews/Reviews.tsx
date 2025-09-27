@@ -67,7 +67,7 @@ const mockReviews: ReviewItem[] = [
 
 export function Reviews() {
     return (
-        <Page className="p-4 pt-24 lg:w-1/2 lg:ml-[25%]">
+        <Page className="p-4 pt-24 lg:w-1/3 lg:ml-[33%]">
             <TypographyH2>Recent Reviews</TypographyH2>
             <TypographyP className={"mb-4"}>Respond to customer feedback from one place.</TypographyP>
 

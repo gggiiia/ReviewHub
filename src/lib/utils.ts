@@ -43,3 +43,21 @@ export function pickTextColor(bg: string): "#000000" | "#FFFFFF" {
     const contrastBlack = (Math.max(Lbg, Lblack) + 0.05) / (Math.min(Lbg, Lblack) + 0.05);
     return contrastWhite >= contrastBlack ? "#FFFFFF" : "#000000";
 }
+
+export async function copyToClipboard(text: string): Promise<void> {
+    if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return;
+    }
+    // Fallback for older browsers and limited contexts
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    // Avoid scrolling to bottom on iOS
+    ta.style.position = "fixed";
+    ta.style.top = "-1000px";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+}

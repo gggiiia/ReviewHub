@@ -69,7 +69,7 @@ export function Share() {
     a.download = `${fileNameSafe || 'share'}-reviews.png`;
     a.click();
   }
-
+  
   return (
     <Page className="p-4 pt-24 lg:w-1/2 lg:ml-[25%]">
       <div className="flex items-center justify-between gap-2 mb-2">
