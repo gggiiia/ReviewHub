@@ -55,6 +55,7 @@ export function ShareDialog({review, children, title = "Share review"}: ShareDia
                 <span>{children}</span>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[540px] max-w-[420px]">
+                {/* Make content area scroll if preview is too tall, ensure preview doesn't overflow */}
                 <DialogHeader>
                     <DialogTitle>{title}</DialogTitle>
                     <DialogDescription>
@@ -62,7 +63,7 @@ export function ShareDialog({review, children, title = "Share review"}: ShareDia
                     </DialogDescription>
                 </DialogHeader>
 
-                <div className="flex flex-col items-center gap-3">
+                <div className="flex flex-col items-center gap-3 max-h-[75vh] overflow-y-auto pr-1">
                     <div className="w-full" data-share-preview ref={previewRef}>
                         <SharePreview review={review}/>
                     </div>

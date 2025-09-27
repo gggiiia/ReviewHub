@@ -1,8 +1,10 @@
 import {TypographyP} from "@/components/ui/Typography.tsx"
-import {MessageSquare, Share2, Star} from "lucide-react"
+import {Share2, Star, Wand2, ArrowRight} from "lucide-react"
 import {Button} from "@/components/ui/button.tsx"
-import {ReplyDialog} from "@/components/app/Reviews/ReplyDialog.tsx"
+import {Textarea} from "@/components/ui/textarea.tsx"
 import {ShareDialog} from "@/components/app/Reviews/ShareDialog.tsx"
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip.tsx"
+import React, { useState } from "react"
 
 export interface ReviewItem {
   id: string
@@ -57,6 +59,60 @@ function SourceBadge({ source }: { source: "google" | "facebook" }) {
 
 export function ReviewCard({ review, onReplySubmit }: ReviewCardProps) {
   const hasReply = !!(review.reply && review.reply.trim().length > 0)
+  const [reply, setReply] = useState("")
+  const [aiLoading, setAiLoading] = useState(false) // reserved for future UI disabled state
+  const [submitting, setSubmitting] = useState(false) // reserved for future UI disabled state
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    // Submit only on Ctrl/Cmd+Enter; allow plain Enter to insert a newline
+    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+      e.preventDefault()
+      void submitReply()
+    }
+  }
+
+  async function submitReply() {
+    const payload = reply.trim()
+    if (!payload) return
+    try {
+      setSubmitting(true)
+      await onReplySubmit?.(review, payload)
+      // eslint-disable-next-line no-console
+      if (!onReplySubmit) console.log("Reply submitted:", { reviewId: review.id, reply: payload })
+      setReply("")
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  async function generateAi() {
+    setAiLoading(true)
+    try {
+      const name = review.author?.split(" ")[0] || "there"
+      const rating = review.rating
+      const text = review.text?.trim() || ""
+
+      let opener = "Thank you for your review."
+      if (rating >= 4) opener = `Thank you so much, ${name}! We truly appreciate your positive feedback.`
+      else if (rating <= 2) opener = `Hi ${name}, we’re sorry to hear about your experience and appreciate you letting us know.`
+      else opener = `Thanks for sharing your thoughts, ${name}.`
+
+      let middle = ""
+      if (text) {
+        middle = " We’ve noted your comments and will share them with our team."
+        if (rating >= 4) middle = " We’re thrilled to hear your comments and will share them with our team."
+        if (rating <= 2) middle = " We’re looking into this and will use your comments to improve."
+      }
+
+      let closer = " If you have any other questions or details to share, please reach out."
+      if (rating >= 4) closer = " We hope to welcome you back again soon!"
+
+      const suggestion = `${opener}${middle}${closer}`
+      setReply((prev) => prev && !prev.endsWith(" ") ? prev + " " + suggestion : (prev ? prev + suggestion : suggestion))
+    } finally {
+      setAiLoading(false)
+    }
+  }
 
   return (
     <div className="border rounded-md p-3 hover:bg-accent/40 transition-colors">
@@ -65,10 +121,27 @@ export function ReviewCard({ review, onReplySubmit }: ReviewCardProps) {
           {review.author.charAt(0).toUpperCase()}
         </div>
         <div className="min-w-0 w-full">
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-2">
             <span className="font-medium truncate max-w-[50%]">{review.author}</span>
             <span className="text-muted-foreground text-xs">{new Date(review.date).toLocaleDateString()}</span>
-            <SourceBadge source={review.source} />
+            <span className="ml-auto flex items-center gap-2">
+              <SourceBadge source={review.source} />
+              {review.text && review.text.trim().length > 0 && (
+                <ShareDialog
+                  review={{
+                    author: review.author,
+                    rating: review.rating,
+                    date: review.date,
+                    text: review.text,
+                  }}
+                >
+                  <Button variant="ghost" size="sm">
+                    <Share2 className="size-4" />
+                    Share
+                  </Button>
+                </ShareDialog>
+              )}
+            </span>
           </div>
           <div className="mt-1">
             <Stars value={review.rating} />
@@ -92,28 +165,29 @@ export function ReviewCard({ review, onReplySubmit }: ReviewCardProps) {
           ) : null}
 
           <div className="mt-3 flex items-center gap-2 justify-end">
-            {review.text && review.text.trim().length > 0 && (
-              <ShareDialog
-                review={{
-                  author: review.author,
-                  rating: review.rating,
-                  date: review.date,
-                  text: review.text,
-                }}
-              >
-                <Button variant="ghost" size="sm">
-                  <Share2 className="size-4" />
-                  Share
-                </Button>
-              </ShareDialog>
-            )}
             {!hasReply && (
-              <ReplyDialog review={review} onSubmit={onReplySubmit}>
-                <Button size="sm">
-                  <MessageSquare className="size-4" />
-                  Reply
+              <div className="w-full flex items-center gap-2">
+                <Textarea
+                  placeholder="Write a reply..."
+                  value={reply}
+                  onChange={(e) => setReply(e.target.value)}
+                  rows={1}
+                  onKeyDown={handleKeyDown}
+                  className="flex-1 min-h-9 max-h-32"
+                />
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button type="button" variant="outline" size="sm" onClick={generateAi} disabled={aiLoading} aria-label="Autocomplete with AI">
+                      <Wand2 className="size-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Reply with AI</TooltipContent>
+                </Tooltip>
+                <Button type="button" size="sm" onClick={submitReply} disabled={submitting || !reply.trim()} aria-label="Send reply">
+                  <ArrowRight className="size-4" />
+                  Send
                 </Button>
-              </ReplyDialog>
+              </div>
             )}
           </div>
         </div>

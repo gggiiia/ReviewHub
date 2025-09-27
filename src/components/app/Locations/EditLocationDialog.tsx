@@ -90,7 +90,7 @@ export function EditLocationDialog({ children, location, title = "Edit location"
             />
           </div>
 
-          <DialogFooter>
+          <DialogFooter className="sm:justify-between">
             <Button type="button" variant="ghost" onClick={() => setOpen(false)} disabled={isSubmitting}>Cancel</Button>
             <Button type="submit" disabled={isSubmitting}>{isSubmitting ? "Saving..." : "Save changes"}</Button>
           </DialogFooter>

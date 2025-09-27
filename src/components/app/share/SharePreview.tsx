@@ -40,8 +40,9 @@ export function SharePreview({ review, className }: SharePreviewProps) {
 
   return (
     <div ref={rootRef} className={className}>
+      {/* Ensure the square preview never exceeds container width */}
       <div
-        className="w-full aspect-square overflow-hidden rounded-lg border p-6 md:p-8 relative"
+        className="w-full aspect-square overflow-hidden rounded-lg border p-4 sm:p-6 md:p-8 relative"
         style={{ backgroundColor: bgColor, color: textColor }}
       >
         <div className="w-full h-full max-w-xl mx-auto flex flex-col gap-8 justify-center">
@@ -77,7 +78,11 @@ export function SharePreview({ review, className }: SharePreviewProps) {
                   />
                 ))}
               </div>
-              <div className="text-base" style={{ lineHeight: 1.6, color: strong }}>
+              <div
+                className="text-base line-clamp-6"
+                style={{ lineHeight: 1.6, color: strong }}
+                title={review.text}
+              >
                 {review.text}
               </div>
             </div>
