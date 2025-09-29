@@ -1,6 +1,8 @@
 import React from "react";
 import type { ReviewItem } from "@/components/app/Reviews/ReviewCard.tsx";
-import { Star as StarIcon } from "lucide-react";
+import {MessageCircleOff, Star as StarIcon} from "lucide-react";
+import {NoReviewsSection} from "@/components/app/Reviews/NoReviewsSection.tsx";
+
 
 export interface WidgetFeedProps {
   reviews: ReviewItem[];
@@ -39,11 +41,13 @@ function SourceBadge({ source }: { source: "google" | "facebook" }) {
   );
 }
 
+
+
 export function WidgetFeed({ reviews }: WidgetFeedProps) {
   return (
       <div className="flex flex-col">
         {reviews.length === 0 && (
-          <div className="p-3 text-sm text-muted-foreground">No positive reviews yet.</div>
+            <NoReviewsSection/>
         )}
         {reviews.map((r) => {
           const initial = r.author.trim().charAt(0).toUpperCase();

@@ -22,7 +22,7 @@ export function LocationCard({ location, className, onEdit, onDelete, ...props }
 
     const {selectedLocation} = useLocations()
 
-    const isSelected = selectedLocation.id === location.id
+    const isSelected = selectedLocation?.id === location.id
     const isSelectedClass = isSelected ? "shadow-xl" : ""
 
     const [imgError, setImgError] = useState(false)

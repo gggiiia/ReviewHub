@@ -4,6 +4,7 @@ import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVal
 import {Link, useLocation} from "react-router";
 import {useTopBar} from "@/services/TopBarService.tsx";
 import {locationsActions, useLocations} from "@/services/LocationsService.ts";
+import {CreateLocationButton} from "@/components/app/Locations/components/CreateLocationButton.tsx";
 
 
 function BusinessSelect() {
@@ -17,7 +18,11 @@ function BusinessSelect() {
         }
     }
 
-    return <Select value={selectedLocation.id} onValueChange={setCurrentValue}>
+    if(locations.length === 0) return <CreateLocationButton/>
+
+    if(locations.length === 1) return
+
+    return <Select value={selectedLocation?.id} onValueChange={setCurrentValue}>
         <SelectTrigger className="w-[280px]">
             <SelectValue placeholder="Select a location"/>
         </SelectTrigger>

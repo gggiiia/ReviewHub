@@ -2,6 +2,7 @@ import React from "react";
 import type { ReviewItem } from "@/components/app/Reviews/ReviewCard.tsx";
 import { Star as StarIcon } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel.tsx";
+import {NoReviewsSection} from "@/components/app/Reviews/NoReviewsSection.tsx";
 
 export interface WidgetCarouselProps {
   reviews: ReviewItem[];
@@ -45,7 +46,7 @@ export function WidgetCarousel({ reviews }: WidgetCarouselProps) {
   const total = items.length;
 
   if (total === 0) {
-    return <div className="border rounded-md p-3 text-sm text-muted-foreground">No positive reviews yet.</div>;
+    return <NoReviewsSection/>;
   }
 
   return (

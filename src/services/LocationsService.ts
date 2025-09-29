@@ -17,8 +17,8 @@ function makeLocations(count: number): LocationItem[] {
 export const fakeLocations: LocationItem[] = makeLocations(8);
 
 const locationState = proxy({
-    selectedLocation: fakeLocations[0],
-    locations: fakeLocations,
+    selectedLocation: null,
+    locations: [],
 })
 
 export const locationsActions = {
@@ -27,6 +27,9 @@ export const locationsActions = {
     },
     createLocation: (newLoc: LocationItem) => {
         locationState.locations = [newLoc, ...locationState.locations]
+        if (locationState.locations.length === 1) {
+            locationState.selectedLocation = locationState.locations[0]
+        }
     },
     updateLocation: (updated: LocationItem) => {
         locationState.locations = locationState.locations.map(item => item.id === updated.id ? updated : item)

@@ -106,7 +106,7 @@ export function ImageInput({
       >
         <div className={cn("size-24 rounded bg-muted overflow-hidden shrink-0 flex items-center justify-center", dragOver && "bg-accent/50", previewClassName)}>
           {internalPreview ? (
-            <img src={internalPreview} alt="Selected image preview" className="w-full h-full object-cover" />
+            <img src={internalPreview} alt="Selected image preview" className="w-full h-full object-contain" />
           ) : (
             <span className={cn("text-xs", dragOver ? "text-foreground" : "text-muted-foreground")}>Drop or select</span>
           )}

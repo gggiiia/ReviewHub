@@ -20,11 +20,11 @@ export function Landing() {
             <div className="flex items-center justify-between gap-2 mb-2">
                 <TypographyH2 className="m-0">Landing</TypographyH2>
                 <div className="flex items-center gap-2">
+                    <LandingQrDialog publicLink={publicLink} />
                     <CopyButton text={publicLink}>
                         <LinkIcon className="size-4" />
                         Copy link
                     </CopyButton>
-                    <LandingQrDialog publicLink={publicLink} />
                 </div>
             </div>
             <TypographyP className="mb-4">Preview and share your public landing page to collect customer reviews.</TypographyP>
