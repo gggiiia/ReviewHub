@@ -1,7 +1,7 @@
 import {Card} from "@/components/ui/card.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
-import {Link, useLocation} from "react-router";
+import {Link, NavLink, useLocation} from "react-router";
 import {useTopBar} from "@/services/TopBarService.tsx";
 import {locationsActions, useLocations} from "@/services/LocationsService.ts";
 import {CreateLocationButton} from "@/components/app/Locations/components/CreateLocationButton.tsx";
@@ -67,25 +67,29 @@ function TopBarNavLink(props: TopBarNavLinkProps) {
     const location = useLocation()
     const isSelected = location.pathname === props.path
 
-    return <Link to={props.path}>
+    return <NavLink to={props.path} className={
+        ({ isActive }) => isActive ? 'bg-accent' : ""
+    }>
         <Button variant={"ghost"} className={isSelected ? 'bg-accent' : ""}>
             {props.label}
         </Button>
-    </Link>
+    </NavLink>
 }
 
 export function TopBar() {
 
     const {routes} = useTopBar()
 
-    return <Card className={'p-2 2xl:px-24 overflow-visible fixed w-full z-50'}>
+    return <Card className={'hidden md:block p-2 2xl:px-24 overflow-visible w-full z-50'}>
         <div className={'flex gap-4 items-center p-2'}>
             <BusinessSelect/>
 
             <div className={'w-full'}></div>
 
             {routes.map(({path, label}) => (
-                <TopBarNavLink path={path} label={label}/>
+                <div key={path}>
+                    <TopBarNavLink path={path} label={label}/>
+                </div>
             ))}
         </div>
     </Card>

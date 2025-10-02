@@ -16,10 +16,12 @@ export const topBarState = proxy<TopBarState>({
     routes: []
 })
 
+
+
 function initTopBarLinks(links:TopBarLInk[]) {
     topBarState.routes = links.map(link => ({
         path: link.path,
-        label: link.label
+        label: link.label,
     }))
 }
 

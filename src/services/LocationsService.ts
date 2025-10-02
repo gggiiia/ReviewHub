@@ -1,6 +1,6 @@
 import type {LocationItem} from "@/components/app/Locations/LocationCard.tsx";
 import {faker} from "@faker-js/faker";
-import {proxy} from "valtio/vanilla";
+import {proxy, subscribe} from "valtio/vanilla";
 import {useSnapshot} from "valtio/react";
 
 function makeLocations(count: number): LocationItem[] {
@@ -16,10 +16,19 @@ function makeLocations(count: number): LocationItem[] {
 
 export const fakeLocations: LocationItem[] = makeLocations(8);
 
-const locationState = proxy({
+interface LocationsState {
+    selectedLocation: LocationItem | null;
+    locations: LocationItem[];
+}
+
+const locationState = proxy<LocationsState>({
     selectedLocation: null,
-    locations: [],
+    locations: fakeLocations,
 })
+
+const unsubscribe = subscribe(locationState, () =>
+    console.log('locations state has changed to', locationState),
+)
 
 export const locationsActions = {
     setSelectedLocation: (location: LocationItem) => {

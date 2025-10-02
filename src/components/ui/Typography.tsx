@@ -4,7 +4,7 @@ export function TypographyH1(props: React.HTMLAttributes<HTMLHeadingElement>) {
     return (
         <h1
             {...props}
-            className={cn("scroll-m-20 text-center text-4xl font-extrabold tracking-tight text-balance", props.className)}
+            className={cn("scroll-m-20 text-4xl font-extrabold tracking-tight text-balance", props.className)}
         />
     )
 }

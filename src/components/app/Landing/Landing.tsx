@@ -16,7 +16,7 @@ export function Landing() {
     const publicLink = `${baseUrl}/l/${encodeURIComponent(selectedLocation?.id || "loc-1")}`;
 
     return (
-        <Page className="p-4 pt-24 lg:w-1/2 lg:ml-[25%]">
+        <Page className="p-4 lg:w-1/2 lg:ml-[25%]">
             <div className="flex items-center justify-between gap-2 mb-2">
                 <TypographyH2 className="m-0">Landing</TypographyH2>
                 <div className="flex items-center gap-2">

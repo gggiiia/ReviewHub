@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button.tsx"
 import { Trash2, Pencil } from "lucide-react"
 import { DeleteConfirmDialog } from "@/components/ui/DeleteConfirmDialog.tsx"
 import { EditLocationDialog } from "@/components/app/Locations/EditLocationDialog.tsx"
-import {useLocations} from "@/services/LocationsService.ts";
+import {locationsActions, useLocations} from "@/services/LocationsService.ts";
 
 export interface LocationItem {
   id: string
@@ -30,13 +30,17 @@ export function LocationCard({ location, className, onEdit, onDelete, ...props }
     const showImage = !!avatarUrl && !imgError
     const initial = location.name[0]
 
+    function onSelect() {
+        locationsActions.setSelectedLocation(location)
+    }
+
     return (
     <div className={cn("border rounded-md p-3 flex items-center gap-3 hover:bg-accent/40 transition-colors",isSelectedClass, className)} {...props}>
       {showImage ? (
         <img
           src={avatarUrl}
           alt={location.name}
-          className="size-12 rounded object-cover bg-muted"
+          className="size-12 rounded object-contain bg-muted"
           loading="lazy"
           onError={() => setImgError(true)}
         />
@@ -51,10 +55,13 @@ export function LocationCard({ location, className, onEdit, onDelete, ...props }
       <div className="min-w-0 flex-1">
         <div className="font-medium truncate">{location.name}</div>
           {
-              isSelected &&
-              <div className={cn("bg-green-500 rounded-2xl w-fit px-1 py-0.5 text-xs font-bold text-white")}>
+              isSelected ?
+              <div className={cn("text-primary-foreground bg-green-500 rounded-2xl w-fit px-3 py-2 text-xs font-bold text-white")}>
                   Active
-              </div>
+              </div> :
+                  <Button onClick={onSelect} type="button" variant="outline" size="sm" aria-label="Select location">
+                      Select
+                  </Button>
           }
       </div>
 

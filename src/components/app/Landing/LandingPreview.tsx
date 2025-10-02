@@ -82,7 +82,7 @@ export function LandingPreview() {
                     <img
                         src={selectedLocation.avatarUrl}
                         alt={`${selectedLocation.name || "Business"} logo`}
-                        className="w-20 h-20 rounded-full object-cover"
+                        className="w-20 h-20 rounded-full object-contain"
                     />
                 ) : (
                     <div

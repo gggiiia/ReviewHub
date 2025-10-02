@@ -8,7 +8,7 @@ export function Reviews() {
     const { reviews } = useReviews();
 
     return (
-        <Page className="p-4 pt-24 lg:w-1/2 lg:ml-[25%]">
+        <Page className="p-4 lg:w-1/2 lg:ml-[25%]">
             <TypographyH2>Recent Reviews</TypographyH2>
             <TypographyP className={"mb-4"}>Respond to customer feedback from one place.</TypographyP>
 
