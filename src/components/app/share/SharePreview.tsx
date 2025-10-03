@@ -42,14 +42,14 @@ export function SharePreview({ review, className }: SharePreviewProps) {
     <div ref={rootRef} className={className}>
       {/* Ensure the square preview never exceeds container width */}
       <div
-        className="w-full aspect-square overflow-hidden rounded-lg border p-4 sm:p-6 md:p-8 relative"
+        className="w-full sm:aspect-square overflow-hidden rounded-lg border p-4 sm:p-6 md:p-8 relative"
         style={{ backgroundColor: bgColor, color: textColor }}
       >
         <div className="w-full h-full max-w-xl mx-auto flex flex-col gap-8 justify-center">
           {/* Header: Avatar + Name + Date */}
           <div className="flex items-center gap-4">
             <div
-              className="rounded-full flex items-center justify-center shadow-sm"
+              className="rounded-full aspect-square flex items-center justify-center shadow-sm"
               style={{ width: 64, height: 64, backgroundColor: isDark ? "rgba(255,255,255,0.9)" : "#ffffff", border: `1px solid ${border}` }}
               aria-hidden="true"
             >

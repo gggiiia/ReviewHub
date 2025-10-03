@@ -11,6 +11,7 @@ import {
 import {Button} from "@/components/ui/button.tsx";
 import {SharePreview, type ReviewData} from "@/components/app/share/SharePreview.tsx";
 import html2canvas from "html2canvas-pro";
+import IsDesktop from "@/components/ui/isDesktop.tsx";
 
 interface ShareDialogProps {
     review: ReviewData;
@@ -70,8 +71,11 @@ export function ShareDialog({review, children, title = "Share review"}: ShareDia
                 </div>
 
                 <DialogFooter>
-                    <Button className={"mr-auto"} type="button" variant="ghost"
-                            onClick={() => setOpen(false)}>Close</Button>
+                    <IsDesktop>
+                        <Button className={"mr-auto"} type="button" variant="ghost"
+                                onClick={() => setOpen(false)}>Close</Button>
+                    </IsDesktop>
+
                     <Button type="button" onClick={download}
                             disabled={downloading}>{downloading ? "Preparing..." : "Download PNG"}</Button>
                 </DialogFooter>

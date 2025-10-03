@@ -30,9 +30,9 @@ export function Landing() {
             <TypographyP className="mb-4">Preview and share your public landing page to collect customer reviews.</TypographyP>
 
 
-            <div className="w-full max-w-[640px] mx-auto">
-                <div className="relative w-full aspect-square overflow-hidden rounded-lg border">
-                    <div className="absolute inset-0 overflow-auto p-0">
+            <div className="w-full min-h-[50vh] mx-auto">
+                <div className="relative w-full h-full overflow-hidden rounded-lg border">
+                    <div className="w-full h-full  overflow-auto">
                         <LandingPreview/>
                     </div>
                 </div>

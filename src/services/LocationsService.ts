@@ -22,13 +22,9 @@ interface LocationsState {
 }
 
 const locationState = proxy<LocationsState>({
-    selectedLocation: null,
+    selectedLocation: fakeLocations[0],
     locations: fakeLocations,
 })
-
-const unsubscribe = subscribe(locationState, () =>
-    console.log('locations state has changed to', locationState),
-)
 
 export const locationsActions = {
     setSelectedLocation: (location: LocationItem) => {

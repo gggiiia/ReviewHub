@@ -5,6 +5,7 @@ import { Trash2, Pencil } from "lucide-react"
 import { DeleteConfirmDialog } from "@/components/ui/DeleteConfirmDialog.tsx"
 import { EditLocationDialog } from "@/components/app/Locations/EditLocationDialog.tsx"
 import {locationsActions, useLocations} from "@/services/LocationsService.ts";
+import IsDesktop from "@/components/ui/isDesktop.tsx";
 
 export interface LocationItem {
   id: string
@@ -54,38 +55,43 @@ export function LocationCard({ location, className, onEdit, onDelete, ...props }
       )}
       <div className="min-w-0 flex-1">
         <div className="font-medium truncate">{location.name}</div>
-          {
-              isSelected ?
-              <div className={cn("text-primary-foreground bg-green-500 rounded-2xl w-fit px-3 py-2 text-xs font-bold text-white")}>
-                  Active
-              </div> :
-                  <Button onClick={onSelect} type="button" variant="outline" size="sm" aria-label="Select location">
-                      Select
-                  </Button>
-          }
-      </div>
+          <div className="flex items-center gap-2 ml-auto">
 
-      <div className="flex items-center gap-2 ml-auto">
-        <EditLocationDialog location={location} onSubmit={(updated) => onEdit?.(updated)}>
-          <Button type="button" variant="outline" size="sm" aria-label="Edit location">
-            <Pencil className="size-4" />
-            Edit
-          </Button>
-        </EditLocationDialog>
-        <DeleteConfirmDialog
-          title="Delete location"
-          description={`Are you sure you want to delete "${location.name}"? This action cannot be undone.`}
-          confirmText="Delete"
-          cancelText="Cancel"
-          onConfirm={() => onDelete?.(location)}
-        >
-            {
-                !isSelected &&
-                <Button type="button" variant="ghost" size="sm" aria-label="Delete location">
-                    <Trash2 className="size-4 text-destructive" />
-                </Button>
-            }
-        </DeleteConfirmDialog>
+              {
+                  isSelected ?
+                      <div className={cn("text-primary-foreground bg-green-500 rounded-2xl w-fit px-3 py-2 text-xs font-bold text-white")}>
+                          Active
+                      </div> :
+                      <Button onClick={onSelect} type="button" variant="outline" size="sm" aria-label="Select location">
+                          Select
+                      </Button>
+              }
+
+              <div className={"mr-auto"}></div>
+
+              <EditLocationDialog location={location} onSubmit={(updated) => onEdit?.(updated)}>
+                  <Button type="button" variant="outline" size="sm" aria-label="Edit location">
+                      <Pencil className="size-4" />
+                      <IsDesktop>
+                          Edit
+                      </IsDesktop>
+                  </Button>
+              </EditLocationDialog>
+              <DeleteConfirmDialog
+                  title="Delete location"
+                  description={`Are you sure you want to delete "${location.name}"? This action cannot be undone.`}
+                  confirmText="Delete"
+                  cancelText="Cancel"
+                  onConfirm={() => onDelete?.(location)}
+              >
+                  {
+                      !isSelected &&
+                      <Button type="button" variant="ghost" size="sm" aria-label="Delete location">
+                          <Trash2 className="size-4 text-destructive" />
+                      </Button>
+                  }
+              </DeleteConfirmDialog>
+          </div>
       </div>
     </div>
   )
