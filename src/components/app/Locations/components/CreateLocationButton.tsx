@@ -4,6 +4,7 @@ import CreateLocationDialog, {type NewLocationData} from "@/components/app/Locat
 import type {LocationItem} from "@/components/app/Locations/LocationCard.tsx";
 import {faker} from "@faker-js/faker";
 import {locationsActions, useLocations} from "@/services/LocationsService.ts";
+import IsDesktop from "@/components/ui/isDesktop.tsx";
 
 export function CreateLocationButton() {
     const { locations } = useLocations()
@@ -18,6 +19,11 @@ export function CreateLocationButton() {
     }
 
     return <CreateLocationDialog onCreate={handleCreate}>
-        <Button><Plus className="size-4" />Create location</Button>
+        <Button>
+            <Plus className="size-4" />
+            <IsDesktop>
+                Create location
+            </IsDesktop>
+        </Button>
     </CreateLocationDialog>
 }

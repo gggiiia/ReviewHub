@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog.tsx";
 import {QrCode as QrCodeIcon, Download as DownloadIcon} from "lucide-react";
 import {QRCodeCanvas} from "qrcode.react";
+import IsDesktop from "@/components/ui/isDesktop.tsx";
 
 export interface LandingQrDialogProps {
     publicLink: string;
@@ -42,7 +43,9 @@ export function LandingQrDialog({publicLink}: LandingQrDialogProps) {
             <DialogTrigger asChild>
                 <Button variant="outline">
                     <QrCodeIcon className="size-4"/>
-                    QR code
+                    <IsDesktop>
+                        QR code
+                    </IsDesktop>
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">

@@ -4,12 +4,13 @@ import {TypographyH2, TypographyP} from "@/components/ui/Typography.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useLocations} from "@/services/LocationsService.ts";
 import {LandingPreview} from "@/components/app/Landing/LandingPreview.tsx";
-import { Link as LinkIcon } from "lucide-react";
-import { LandingQrDialog } from "@/components/app/Landing/LandingQrDialog.tsx";
-import { CopyButton } from "@/components/ui/copy-button.tsx";
+import {Link as LinkIcon} from "lucide-react";
+import {LandingQrDialog} from "@/components/app/Landing/LandingQrDialog.tsx";
+import {CopyButton} from "@/components/ui/copy-button.tsx";
+import IsDesktop from "@/components/ui/isDesktop.tsx";
 
 export function Landing() {
-    const { selectedLocation } = useLocations();
+    const {selectedLocation} = useLocations();
 
 
     const baseUrl = typeof window !== "undefined" ? window.location.origin : "https://example.com";
@@ -20,14 +21,17 @@ export function Landing() {
             <div className="flex items-center justify-between gap-2 mb-2">
                 <TypographyH2 className="m-0">Landing</TypographyH2>
                 <div className="flex items-center gap-2">
-                    <LandingQrDialog publicLink={publicLink} />
+                    <LandingQrDialog publicLink={publicLink}/>
                     <CopyButton text={publicLink}>
-                        <LinkIcon className="size-4" />
-                        Copy link
+                        <LinkIcon className="size-4"/>
+                        <IsDesktop>
+                            Copy link
+                        </IsDesktop>
                     </CopyButton>
                 </div>
             </div>
-            <TypographyP className="mb-4">Preview and share your public landing page to collect customer reviews.</TypographyP>
+            <TypographyP className="mb-4">Preview and share your public landing page to collect customer
+                reviews.</TypographyP>
 
 
             <div className="w-full min-h-[50vh] mx-auto">
