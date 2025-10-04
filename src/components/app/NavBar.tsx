@@ -24,7 +24,7 @@ function NavBarLink(props: NavBarNavLinkProps) {
 export function NavBar() {
     const {routes} = useTopBar()
 
-    return <div className={"md:hidden flex flex-row gap-2 justify-around"}>
+    return <div className={"flex flex-row gap-2 justify-around"}>
         {
             routes.map(({path, label}) => (
                 <div key={path}>

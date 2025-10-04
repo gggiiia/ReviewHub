@@ -80,7 +80,7 @@ export function TopBar() {
 
     const {routes} = useTopBar()
 
-    return <Card className={'hidden md:block p-2 2xl:px-24 overflow-visible w-full z-50'}>
+    return <Card className={'p-2 2xl:px-24 overflow-visible w-full z-50'}>
         <div className={'flex gap-4 items-center p-2'}>
             <BusinessSelect/>
 
