@@ -14,6 +14,7 @@ import {Input} from "@/components/ui/input.tsx"
 import {TypographyP} from "@/components/ui/Typography.tsx"
 import {ImageInput} from "@/components/ui/image-input.tsx"
 import type {LocationItem} from "@/components/app/Locations/LocationCard.tsx"
+import IsDesktop from "@/components/ui/isDesktop.tsx";
 
 export interface EditLocationData {
   name: string
@@ -91,8 +92,10 @@ export function EditLocationDialog({ children, location, title = "Edit location"
           </div>
 
           <DialogFooter className="sm:justify-between">
-            <Button type="button" variant="ghost" onClick={() => setOpen(false)} disabled={isSubmitting}>Cancel</Button>
-            <Button type="submit" disabled={isSubmitting}>{isSubmitting ? "Saving..." : "Save changes"}</Button>
+              <IsDesktop>
+                  <Button type="button" variant="ghost" onClick={() => setOpen(false)} disabled={isSubmitting}>Cancel</Button>
+              </IsDesktop>
+           <Button type="submit" disabled={isSubmitting}>{isSubmitting ? "Saving..." : "Save changes"}</Button>
           </DialogFooter>
         </form>
       </DialogContent>

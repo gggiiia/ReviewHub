@@ -95,7 +95,7 @@ export function ImageInput({
       )}
       <div
         className={cn(
-          "rounded-md border p-3 flex items-center gap-3 transition-colors hover:bg-accent/20 hover:border-ring/50",
+          "rounded-md border p-3 flex flex-col sm:flex-row items-center gap-3 transition-colors hover:bg-accent/20 hover:border-ring/50",
           dragOver && "bg-accent/40 border-ring ring-2 ring-ring/30",
           disabled && "opacity-60",
         )}
@@ -111,7 +111,7 @@ export function ImageInput({
             <span className={cn("text-xs", dragOver ? "text-foreground" : "text-muted-foreground")}>Drop or select</span>
           )}
         </div>
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 w-full">
           <div className="flex flex-wrap items-center gap-2">
             <input
               ref={inputRef}
@@ -125,11 +125,11 @@ export function ImageInput({
               {...rest}
             />
             {internalPreview && (
-              <Button type="button" variant="outline" size="sm" onClick={clear} disabled={disabled}>Clear</Button>
+              <Button className={"w-full sm:w-auto"} type="button" variant="outline" size="sm" onClick={clear} disabled={disabled}>Clear</Button>
             )}
               {
                   !internalPreview && (
-                   <Button type="button" variant="outline" size="sm" disabled={disabled} onClick={() => inputRef.current?.click()}>Select</Button>
+                   <Button className={"w-full sm:w-auto"} type="button" variant="outline" size="sm" disabled={disabled} onClick={() => inputRef.current?.click()}>Select</Button>
                   )
               }
           </div>
