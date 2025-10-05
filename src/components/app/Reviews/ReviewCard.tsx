@@ -133,7 +133,7 @@ export function ReviewCard({review, onReplySubmit}: ReviewCardProps) {
     }
 
     return (
-        <div className="border rounded-md p-3 hover:bg-accent/40 transition-colors">
+        <div className="border rounded-md p-3 transition-colors">
             <div className="flex items-start gap-3">
                 <IsDesktop>
                     <AvatarBadge name={review.author}></AvatarBadge>
