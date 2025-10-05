@@ -20,6 +20,8 @@
     "@tailwindcss/vite": "^4.1.13",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "color-convert": "^3.1.2",
+    "colord": "^2.9.3",
     "embla-carousel-react": "^8.6.0",
     "html2canvas-pro": "^1.5.11",
     "lucide-react": "^0.544.0",

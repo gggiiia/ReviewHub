@@ -11,6 +11,7 @@ import {Checkbox} from "@/components/ui/checkbox.tsx";
 import {useForm} from "react-hook-form";
 import {Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
 import {saveSettings, toggleFacebook, toggleGoogle, useSettings} from "@/services/SettingsService.ts";
+import {ThemeInput} from "@/components/ui/themeInput.tsx";
 
 interface SettingsForm {
     notifEmail: boolean
@@ -77,8 +78,13 @@ export function SettingsPage() {
             <TypographyP>Manage your integrations, notifications, and account.</TypographyP>
         </div>
 
+
+
         {/* Integrations */}
         <Card>
+
+            <ThemeInput></ThemeInput>
+
             <CardHeader className="flex flex-row items-start justify-between">
                 <div className="flex items-center gap-3">
                     <div className="p-2 rounded-md bg-accent text-accent-foreground"><Plug2 className="size-4"/></div>
