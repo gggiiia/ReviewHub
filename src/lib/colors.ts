@@ -92,9 +92,9 @@ export function generateThemeVariables(hex: string): Record<string, string> {
         // 5. Secondary/Muted/Accent Colors
         '--secondary': formatOklch(adjustL(0.95), 0.05, baseHue),
         '--secondary-foreground': formatOklch(adjustL(0.2), 0.05, baseHue),
-        '--muted': formatOklch(adjustL(0.96), 0.03, baseHue),
+        '--muted': formatOklch(adjustL(0.96), veryLowChroma, baseHue),
         '--muted-foreground': formatOklch(adjustL(0.5), 0.05, baseHue),
-        '--accent': formatOklch(adjustL(0.95), 0.05, baseHue),
+        '--accent': formatOklch(adjustL(0.95), veryLowChroma, baseHue),
         '--accent-foreground': formatOklch(adjustL(0.2), 0.05, baseHue),
 
         // 6. Destructive (Fixed Red)

@@ -41,36 +41,22 @@ export function ThemeInput() {
     }, [primaryColor]); // Dependency array: runs only when primaryColor changes
 
     return (
-        <div className="flex flex-col space-y-4 p-6 border rounded-lg shadow-md max-w-lg">
-            <h3 className="text-xl font-bold">Dynamic OKLCH Theme Customizer</h3>
+        <div className="flex items-center space-x-4">
+            <Input
+                id="theme-color"
+                type="color"
+                value={primaryColor}
+                onChange={handleColorChange}
+                className="w-16 h-10 p-0 border cursor-pointer"
+            />
 
-            <div className="flex items-center space-x-4">
-                <label htmlFor="theme-color" className="shrink-0 font-medium">
-                    Primary Color:
-                </label>
-
-                <Input
-                    id="theme-color"
-                    type="color"
-                    value={primaryColor}
-                    onChange={handleColorChange}
-                    className="w-16 h-10 p-0 border cursor-pointer"
-                />
-
-                <Input
-                    type="text"
-                    value={primaryColor}
-                    onChange={handleColorChange}
-                    maxLength={7}
-                    className="w-24 font-mono text-sm"
-                />
-            </div>
-
-            {/* Demonstrating the theme update */}
-            <div className="pt-4 space-y-2">
-                <Button>Primary Button (bg-primary)</Button>
-                <Button variant="secondary" className="ml-2">Secondary Button</Button>
-            </div>
+            <Input
+                type="text"
+                value={primaryColor}
+                onChange={handleColorChange}
+                maxLength={7}
+                className="w-24 font-mono text-sm"
+            />
         </div>
     );
 }
