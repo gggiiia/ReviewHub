@@ -4,14 +4,20 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 import {Button} from "@/components/ui/button.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {ImageInput} from "@/components/ui/image-input.tsx";
-import {Bell, CheckCircle2, Plug2, User, Facebook, Chrome, Trash2} from "lucide-react";
-import {useState, useEffect} from "react";
+import {Bell, CheckCircle2, Chrome, Facebook, Plug2, Trash2, User} from "lucide-react";
+import {useEffect, useState} from "react";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import {Checkbox} from "@/components/ui/checkbox.tsx";
 import {useForm} from "react-hook-form";
-import {Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle} from "@/components/ui/dialog.tsx";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from "@/components/ui/dialog.tsx";
 import {saveSettings, toggleFacebook, toggleGoogle, useSettings} from "@/services/SettingsService.ts";
-import {ThemeInput} from "@/components/ui/themeInput.tsx";
 
 interface SettingsForm {
     notifEmail: boolean
@@ -83,7 +89,7 @@ export function SettingsPage() {
         {/* Integrations */}
         <Card>
 
-            <ThemeInput></ThemeInput>
+           {/* <ThemeInput></ThemeInput>*/}
 
             <CardHeader className="flex flex-row items-start justify-between">
                 <div className="flex items-center gap-3">

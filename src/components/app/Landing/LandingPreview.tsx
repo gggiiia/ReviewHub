@@ -225,7 +225,7 @@ export function LandingPreview() {
     }
 
     return (
-        <div className="w-full h-full flex items-center justify-center p-4">
+        <div className="w-full h-full flex items-center justify-center p-4 text-black">
             <div className="w-full max-w-[640px] bg-white rounded-lg p-6">
                 {step === "rate" && (
                     <Rate></Rate>

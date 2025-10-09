@@ -1,8 +1,8 @@
-import {TypographyH1} from "@/components/ui/Typography.tsx";
 import {useTopBar} from "@/services/TopBarService.tsx";
-import {routingIconMap} from "@/routes/router.tsx";
 import {cn} from "@/lib/utils.ts";
 import {Link, useLocation} from "react-router";
+import {agencyRoutingIconMap, businessRoutingIconMap} from "@/routes/router.tsx";
+import {useRoutingState} from "@/services/RoutingState.ts";
 
 
 interface NavBarNavLinkProps {
@@ -11,13 +11,14 @@ interface NavBarNavLinkProps {
 }
 
 function NavBarLink(props: NavBarNavLinkProps) {
-
     const location = useLocation()
+    const {mode} = useRoutingState()
     const isSelected = location.pathname === props.path
     const isSelectedClass = isSelected ? "bg-accent" : ""
+    const iconMap = mode === "business" ? businessRoutingIconMap : agencyRoutingIconMap
 
     return <Link to={props.path} className={cn("block p-4", isSelectedClass)}>
-        {routingIconMap[props.label]}
+        {iconMap[props.label]}
     </Link>
 }
 

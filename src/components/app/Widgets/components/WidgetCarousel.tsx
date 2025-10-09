@@ -35,8 +35,8 @@ export function WidgetCarousel({ reviews }: WidgetCarouselProps) {
         <CarouselContent className="items-stretch">
           {items.map((current) => {
             return (
-              <CarouselItem key={current.id} className={"lg:basis-1/2 xl:basis-1/3 h-full self-stretch"}>
-                <div className="border rounded-md p-3 bg-white h-full flex flex-col min-h-[200px]">
+              <CarouselItem key={current.id} className={"lg:basis-1/2 xl:basis-1/3 h-full self-stretch "}>
+                <div className="border rounded-md p-3 bg-card h-full flex flex-col min-h-[200px]">
                   <div className="flex items-start gap-3 flex-1">
                       <IsDesktop>
                           <AvatarBadge name={current.author}></AvatarBadge>

@@ -30,7 +30,7 @@ export function WidgetFeed({ reviews }: WidgetFeedProps) {
         {reviews.map((current) => {
           return (
             <div key={current.id} className="py-3">
-              <div className="border rounded-md p-3 bg-white">
+              <div className="border rounded-md p-3 bg-card">
                 <div className="flex items-start gap-3">
                     <IsDesktop>
                         <AvatarBadge name={current.author}></AvatarBadge>

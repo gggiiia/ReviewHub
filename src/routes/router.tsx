@@ -1,4 +1,4 @@
-import {createBrowserRouter} from "react-router";
+import {createBrowserRouter, RouterProvider} from "react-router";
 import App from "@/App.tsx";
 import {Reviews} from "@/components/app/Reviews/Reviews.tsx";
 import {Locations} from "@/components/app/Locations/Locations.tsx";
@@ -17,7 +17,19 @@ export const businessModeLinks = [
     {label: "Settings", path: "/Settings", element:<SettingsPage/>}
 ]
 
-export const routingIconMap = {
+export const agencyModeLinks = [
+    {label: "Clients", path: "/Clients", element: <Reviews/>},
+    {label: "Design", path: "/Design", element: <Widgets/>},
+    {label: "Settings", path: "/Settings", element:<SettingsPage/>}
+]
+
+export const agencyRoutingIconMap = {
+    Clients: <Grid2x2/>,
+    Design: <Settings/>,
+    Settings: <Settings/>,
+}
+
+export const businessRoutingIconMap = {
     Reviews: <Star/>,
     Locations: <MapPin/>,
     Landing: <PanelTop/>,
@@ -26,12 +38,16 @@ export const routingIconMap = {
     Settings: <Settings/>,
 }
 
-export const router = createBrowserRouter([
+export const router =  createBrowserRouter([
     {
         path: "/",
         element: <App/>,
-        children: businessModeLinks
+        children: [...agencyModeLinks,...businessModeLinks]
     },
 
 ]);
 
+
+export function MainRouter() {
+    return <RouterProvider router={router}></RouterProvider>
+}

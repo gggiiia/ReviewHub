@@ -1,6 +1,8 @@
-import {proxy} from "valtio/vanilla";
+import {proxy, subscribe} from "valtio/vanilla";
 import {useSnapshot} from "valtio/react";
-import {businessModeLinks} from "@/routes/router.tsx";
+import {agencyModeLinks, businessModeLinks} from "@/routes/router.tsx";
+import {routingState} from "@/services/RoutingState.ts";
+import {useNavigate} from "react-router";
 
 
 type TopBarLInk = {
@@ -13,9 +15,8 @@ interface TopBarState {
 }
 
 export const topBarState = proxy<TopBarState>({
-    routes: []
+    routes: [],
 })
-
 
 
 function initTopBarLinks(links:TopBarLInk[]) {
@@ -25,9 +26,10 @@ function initTopBarLinks(links:TopBarLInk[]) {
     }))
 }
 
+export const topBarActions = {
+    initTopBarLinks
+}
+
 export function useTopBar() {
-    if(topBarState.routes.length == 0) {
-        initTopBarLinks(businessModeLinks)
-    }
     return useSnapshot(topBarState)
 }

@@ -32,7 +32,7 @@ export function WidgetMasonry({reviews}: WidgetMasonryProps) {
             className="[column-width:16rem] gap-4 sm:[column-width:18rem] md:[column-width:20rem] [column-fill:balance]">
             {reviews.map((current) => {
                 return (
-                    <div key={current.id} className="mb-4 break-inside-avoid border rounded-md p-3 bg-white">
+                    <div key={current.id} className="mb-4 break-inside-avoid border rounded-md p-3 bg-card">
                         <div className="flex items-start gap-3">
                             <IsDesktop>
                                 <AvatarBadge name={current.author}></AvatarBadge>
