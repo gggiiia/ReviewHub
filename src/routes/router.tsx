@@ -5,8 +5,10 @@ import {Locations} from "@/components/app/Locations/Locations.tsx";
 import {Landing} from "@/components/app/Landing/Landing.tsx";
 import {Share} from "@/components/app/share/Share.tsx";
 import {Widgets} from "@/components/app/Widgets/Widgets.tsx";
-import {Grid2x2, MapPin, PanelTop, Settings, Share2, Star} from "lucide-react";
+import {BadgeDollarSign, Grid2x2, MapPin, PanelTop, Settings, Share2, Star, Users} from "lucide-react";
 import {SettingsPage} from "@/components/app/Settings/SettingsPage.tsx";
+import {Clients} from "@/components/app/Clients/Clients.tsx";
+import {Plans} from "@/components/app/Plans/Plans.tsx";
 
 export const businessModeLinks = [
     {label: "Reviews", path: "/Reviews", element: <Reviews/>},
@@ -18,13 +20,15 @@ export const businessModeLinks = [
 ]
 
 export const agencyModeLinks = [
-    {label: "Clients", path: "/Clients", element: <Reviews/>},
+    {label: "Plans", path: "/Plans", element: <Plans/>},
+    {label: "Clients", path: "/Clients", element: <Clients/>},
     {label: "Design", path: "/Design", element: <Widgets/>},
     {label: "Settings", path: "/Settings", element:<SettingsPage/>}
 ]
 
 export const agencyRoutingIconMap = {
-    Clients: <Grid2x2/>,
+    Plans: <BadgeDollarSign />,
+    Clients: <Users />,
     Design: <Settings/>,
     Settings: <Settings/>,
 }

@@ -8,6 +8,7 @@ import {useNavigate} from "react-router";
 type TopBarLInk = {
     path: string;
     label: string;
+    isDisabled?: () => boolean;
 }
 
 interface TopBarState {
@@ -23,6 +24,7 @@ function initTopBarLinks(links:TopBarLInk[]) {
     topBarState.routes = links.map(link => ({
         path: link.path,
         label: link.label,
+        isDisabled: link.isDisabled,
     }))
 }
 

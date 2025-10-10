@@ -1,9 +1,17 @@
-import {MessageCircleOff} from "lucide-react";
+import {Star} from "lucide-react";
 import React from "react";
+import {Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle} from "@/components/ui/empty.tsx";
 
 export function NoReviewsSection() {
-    return  <div className={"flex flex-col items-center justify-center gap-2 rounded-md p-3 text-sm text-muted-foreground"}>
-        <MessageCircleOff className={"size-14"} />
-        <div className="p-3 text-sm text-muted-foreground text-center">No reviews yet.</div>
-    </div>
+    return  <Empty className="border">
+        <EmptyHeader>
+            <EmptyMedia variant="icon">
+                <Star className="size-6" />
+            </EmptyMedia>
+            <EmptyTitle>No reviews yet</EmptyTitle>
+            <EmptyDescription>
+                Once customers start leaving feedback, you'll see it here and can reply.
+            </EmptyDescription>
+        </EmptyHeader>
+    </Empty>
 }

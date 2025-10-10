@@ -4,13 +4,20 @@ import {LocationCard} from "@/components/app/Locations/LocationCard.tsx";
 import {locationsActions, useLocations} from "@/services/LocationsService.ts";
 import {CreateLocationButton} from "@/components/app/Locations/components/CreateLocationButton.tsx";
 import {MapPin} from "lucide-react";
+import {Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle} from "@/components/ui/empty.tsx";
 
 function NoLocationsSection() {
-    return <div
-        className={"flex flex-col items-center justify-center gap-2 rounded-md p-3 text-sm text-muted-foreground"}>
-        <MapPin className={"size-14"}/>
-        <div className="p-3 text-sm text-muted-foreground text-center">No locations yet.</div>
-    </div>
+    return <Empty className="border">
+        <EmptyHeader>
+            <EmptyMedia variant="icon">
+                <MapPin className="size-6"/>
+            </EmptyMedia>
+            <EmptyTitle>No locations yet</EmptyTitle>
+            <EmptyDescription>
+                Create your first location to start managing reviews and widgets.
+            </EmptyDescription>
+        </EmptyHeader>
+    </Empty>
 }
 
 function LocationsSection() {

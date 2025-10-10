@@ -104,3 +104,78 @@ export function generateThemeVariables(hex: string): Record<string, string> {
 
     return colors;
 }
+
+
+function hexToRgb(hex:string) {
+    // Remove '#' if present
+    const cleanedHex = hex.startsWith('#') ? hex.slice(1) : hex;
+
+    // Handle shorthand hex codes (e.g., "FFF")
+    if (cleanedHex.length === 3) {
+        const r = parseInt(cleanedHex[0] + cleanedHex[0], 16);
+        const g = parseInt(cleanedHex[1] + cleanedHex[1], 16);
+        const b = parseInt(cleanedHex[2] + cleanedHex[2], 16);
+        return [r, g, b];
+    }
+
+    // Handle full hex codes (e.g., "FFFFFF")
+    if (cleanedHex.length === 6) {
+        const r = parseInt(cleanedHex.substring(0, 2), 16);
+        const g = parseInt(cleanedHex.substring(2, 4), 16);
+        const b = parseInt(cleanedHex.substring(4, 6), 16);
+        return [r, g, b];
+    }
+
+    // Return black if invalid hex
+    console.warn("Invalid hex color provided, defaulting to black text:", hex);
+    return [0, 0, 0];
+}
+
+/**
+ * Calculates the luminance of an RGB color.
+ * Uses the formula for perceived brightness.
+ * @param {number[]} rgb - An array of [R, G, B] values (0-255).
+ * @returns {number} - The luminance value (0-255).
+ */
+function getLuminance([r, g, b]) {
+    // Formula for perceived brightness (recommened by W3C for accessibility)
+    // See: https://www.w3.org/TR/AERT/#color-contrast
+    return (0.299 * r + 0.587 * g + 0.114 * b);
+}
+
+/**
+ * Determines a contrast text color (white or black) for a given background color.
+ * @param {string} backgroundColor - The background color string (e.g., "#RRGGBB" or "R, G, B").
+ * @returns {string} - The Tailwind CSS class for the contrast text color ("text-white" or "text-black").
+ */
+export function getContrastTextColorClass(backgroundColor) {
+    let rgb;
+
+    // Check if it's a hex color
+    if (backgroundColor.startsWith('#') || /^[0-9A-Fa-f]{3}([0-9A-Fa-f]{3})?$/.test(backgroundColor)) {
+        rgb = hexToRgb(backgroundColor);
+    }
+    // Check if it's an RGB string (simple parsing)
+    else if (backgroundColor.startsWith('rgb(') && backgroundColor.endsWith(')')) {
+        const parts = backgroundColor.substring(4, backgroundColor.length - 1).split(',').map(Number);
+        if (parts.length === 3 && parts.every(p => p >= 0 && p <= 255)) {
+            rgb = parts;
+        } else {
+            console.warn("Invalid RGB color string, defaulting to black text:", backgroundColor);
+            rgb = [0, 0, 0]; // Default to black
+        }
+    }
+    else {
+        console.warn("Unsupported color format, defaulting to black text:", backgroundColor);
+        rgb = [0, 0, 0]; // Default to black
+    }
+
+    const luminance = getLuminance(rgb);
+
+    // A common threshold for light/dark is 128 (half of 256)
+    // If luminance is > 186, it's considered light, so use black text.
+    // This threshold can be adjusted based on visual preference.
+    const threshold = 186; // A slightly higher threshold often works better for readability
+
+    return luminance > threshold ? 'text-black' : 'text-white';
+}

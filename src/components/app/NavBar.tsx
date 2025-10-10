@@ -8,6 +8,7 @@ import {useRoutingState} from "@/services/RoutingState.ts";
 interface NavBarNavLinkProps {
     path: string;
     label: string;
+    isDisabled: () => boolean;
 }
 
 function NavBarLink(props: NavBarNavLinkProps) {
@@ -16,6 +17,10 @@ function NavBarLink(props: NavBarNavLinkProps) {
     const isSelected = location.pathname === props.path
     const isSelectedClass = isSelected ? "bg-accent" : ""
     const iconMap = mode === "business" ? businessRoutingIconMap : agencyRoutingIconMap
+
+    if(props.isDisabled && props.isDisabled()) return null
+
+    console.log("NavBarLink",props.isDisabled)
 
     return <Link to={props.path} className={cn("block p-4", isSelectedClass)}>
         {iconMap[props.label]}
@@ -27,9 +32,9 @@ export function NavBar() {
 
     return <div className={"flex flex-row gap-2 justify-around"}>
         {
-            routes.map(({path, label}) => (
+            routes.map(({path, label,isDisabled}) => (
                 <div key={path}>
-                    <NavBarLink path={path} label={label}/>
+                    <NavBarLink path={path} label={label} isDisabled={isDisabled}/>
                 </div>
             ))
         }

@@ -59,7 +59,7 @@ export function LocationCard({ location, className, onEdit, onDelete, ...props }
 
               {
                   isSelected ?
-                      <div className={cn("text-primary-foreground bg-green-500 rounded-2xl w-fit px-3 py-2 text-xs font-bold text-white")}>
+                      <div className={cn("text-primary-foreground bg-green-500 rounded-2xl w-fit px-3 py-1 text-xs font-bold text-white")}>
                           Active
                       </div> :
                       <Button onClick={onSelect} type="button" variant="outline" size="sm" aria-label="Select location">

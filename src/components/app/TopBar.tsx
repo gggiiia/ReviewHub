@@ -84,8 +84,10 @@ function TopBarNavLink(props: TopBarNavLinkProps) {
 }
 
 function SwitchToAgentModeButton() {
-
+    const {mode} = useRoutingState()
     const navigate = useNavigate()
+
+    if (mode === "agency") return null
 
     function onSwitch() {
         routingActions.switchMode(navigate)
@@ -101,20 +103,24 @@ export function TopBar() {
 
     const {mode} = useRoutingState()
     const {routes} = useTopBar()
+    const navigate = useNavigate()
 
     useEffect(() => {
-        if(mode === "agency") {
+        if (mode === "agency") {
             topBarActions.initTopBarLinks(agencyModeLinks)
+            navigate("/Clients")
         } else {
             topBarActions.initTopBarLinks(businessModeLinks)
+            navigate("/Reviews")
         }
     }, [mode]);
 
     return <Card className={'p-2 2xl:px-24 overflow-visible w-full z-50'}>
         <div className={'flex gap-4 items-center p-2'}>
             <SwitchToAgentModeButton/>
-            <BusinessSelect/>
-
+            {
+                mode === "business" && <BusinessSelect/>
+            }
             <div className={'w-full'}></div>
 
             {routes.map(({path, label}) => (

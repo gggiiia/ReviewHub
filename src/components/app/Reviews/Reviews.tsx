@@ -3,9 +3,16 @@ import {Page} from "@/components/app/Page.tsx";
 import {ReviewCard} from "@/components/app/Reviews/ReviewCard.tsx";
 import { reviewsActions, useReviews } from "@/services/ReviewsService.ts";
 import {NoReviewsSection} from "@/components/app/Reviews/NoReviewsSection.tsx";
+import {useLocations} from "@/services/LocationsService.ts";
+import {Navigate} from "react-router";
 
 export function Reviews() {
     const { reviews } = useReviews();
+    const {locations} = useLocations()
+
+    if(locations.length === 0) return (
+        <Navigate to="/Locations" replace />
+    )
 
     return (
         <Page className="p-4 lg:w-1/2 lg:ml-[25%]">

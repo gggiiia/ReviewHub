@@ -18,6 +18,8 @@ import {
     DialogTitle
 } from "@/components/ui/dialog.tsx";
 import {saveSettings, toggleFacebook, toggleGoogle, useSettings} from "@/services/SettingsService.ts";
+import {FacebookIcon} from "@/components/ui/icons/facebookIcon.tsx";
+import {GoogleIcon} from "@/components/ui/icons/googleIcon.tsx";
 
 interface SettingsForm {
     notifEmail: boolean
@@ -35,7 +37,7 @@ export function SettingsPage() {
     const [googleConnected, setGoogleConnected] = useState(snap.googleConnected)
     const [confirm, setConfirm] = useState<{open: boolean; provider: 'facebook' | 'google' | null}>({open:false, provider:null})
 
-    const {register, handleSubmit, formState: {errors, isSubmitting}, watch, setValue, reset} = useForm<SettingsForm>({
+    const {register, handleSubmit, formState: {errors, isSubmitting,isDirty}, watch, setValue, reset} = useForm<SettingsForm>({
         defaultValues: {
             notifEmail: snap.notifEmail,
             notifSms: snap.notifSms,
@@ -104,7 +106,7 @@ export function SettingsPage() {
                 {/* Facebook */}
                 <div className="flex items-center justify-between gap-4 border rounded-lg p-3">
                     <div className="flex items-center gap-3 min-w-0">
-                        <Facebook className="size-5 text-blue-600"/>
+                        <FacebookIcon className="size-5"/>
                         <div className="min-w-0">
                             <TypographyH3 className="text-base">Facebook</TypographyH3>
                             <TypographyP className="text-sm text-muted-foreground truncate">Manage your Facebook reviews and pages.</TypographyP>
@@ -134,7 +136,7 @@ export function SettingsPage() {
                 {/* Google */}
                 <div className="flex items-center justify-between gap-4 border rounded-lg p-3">
                     <div className="flex items-center gap-3 min-w-0">
-                        <Chrome className="size-5 text-emerald-600"/>
+                        <GoogleIcon className="size-5 text-emerald-600"/>
                         <div className="min-w-0">
                             <TypographyH3 className="text-base">Google</TypographyH3>
                             <TypographyP className="text-sm text-muted-foreground truncate">Connect to manage Google Business reviews.</TypographyP>
@@ -244,7 +246,7 @@ export function SettingsPage() {
         </Card>
         <div className="flex justify-between gap-2">
             <Button type="button" variant="destructive" size="sm">Log Out</Button>
-            <Button type="submit" variant="default" size="sm" disabled={isSubmitting}>{isSubmitting ? "Saving..." : "Save changes"}</Button>
+            <Button type="submit" variant="default" size="sm" disabled={isSubmitting || !isDirty}>{isSubmitting ? "Saving..." : "Save changes"}</Button>
         </div>
 
         <Dialog open={confirm.open} onOpenChange={(open)=> !open ? setConfirm({open:false, provider:null}) : undefined}>

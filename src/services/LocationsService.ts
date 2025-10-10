@@ -21,7 +21,7 @@ interface LocationsState {
     locations: LocationItem[];
 }
 
-const locationState = proxy<LocationsState>({
+export const locationState = proxy<LocationsState>({
     selectedLocation: fakeLocations[0],
     locations: fakeLocations,
 })
