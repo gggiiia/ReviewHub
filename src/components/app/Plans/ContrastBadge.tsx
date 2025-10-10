@@ -11,5 +11,5 @@ export function ContrastBadge(props: PriceBadgeProps) {
 
     return <div style={{backgroundColor: color}}
                 {...props}
-                className={cn("text-xs px-2 py-1 rounded-full", props.className, colorClass)}/>
+                className={cn("text-xs px-2 py-1 rounded-full font-bold", props.className, colorClass)}/>
 }

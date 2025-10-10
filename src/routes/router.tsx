@@ -9,6 +9,7 @@ import {BadgeDollarSign, Grid2x2, MapPin, PanelTop, Settings, Share2, Star, User
 import {SettingsPage} from "@/components/app/Settings/SettingsPage.tsx";
 import {Clients} from "@/components/app/Clients/Clients.tsx";
 import {Plans} from "@/components/app/Plans/Plans.tsx";
+import {Design} from "@/components/app/Design/Design.tsx";
 
 export const businessModeLinks = [
     {label: "Reviews", path: "/Reviews", element: <Reviews/>},
@@ -22,7 +23,7 @@ export const businessModeLinks = [
 export const agencyModeLinks = [
     {label: "Plans", path: "/Plans", element: <Plans/>},
     {label: "Clients", path: "/Clients", element: <Clients/>},
-    {label: "Design", path: "/Design", element: <Widgets/>},
+    {label: "Design", path: "/Design", element: <Design/>},
     {label: "Settings", path: "/Settings", element:<SettingsPage/>}
 ]
 

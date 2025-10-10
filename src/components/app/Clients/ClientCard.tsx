@@ -27,8 +27,7 @@ export function ClientCard({client, className, onEdit, onDelete, ...props}: Clie
     const {plans} = usePlans()
 
     const plan = plans.find(p => p.id === client.planId)
-
-
+    
     function onSwitch() {
         routingActions.switchMode(navigate)
         designActions.switchTheme()
@@ -40,12 +39,12 @@ export function ClientCard({client, className, onEdit, onDelete, ...props}: Clie
     }
 
     return (
-        <div className={cn("border rounded-md p-3 flex items-center gap-3 transition-colors", className)} {...props}>
+        <div className={cn("border rounded-md p-3 flex items-center gap-3 transition-colors min-w-0", className)} {...props}>
             {showImage ? (
                 <img
                     src={logoUrl}
                     alt={client.name}
-                    className="size-12 rounded object-contain bg-muted"
+                    className="size-12 rounded object-contain bg-white"
                     loading="lazy"
                     onError={() => setImgError(true)}
                 />

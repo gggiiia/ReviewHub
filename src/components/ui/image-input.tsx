@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from "react"
 import {cn} from "@/lib/utils"
 import {Button} from "@/components/ui/button.tsx"
+import {Label} from "@/components/ui/label.tsx";
 
 export interface ImageInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange" | "type"> {
   value?: string | null
@@ -91,7 +92,7 @@ export function ImageInput({
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       {label && (
-        <label htmlFor={id} className="text-sm font-medium">{label}</label>
+        <Label htmlFor={id} className="text-sm font-medium">{label}</Label>
       )}
       <div
         className={cn(
@@ -104,7 +105,7 @@ export function ImageInput({
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
       >
-        <div className={cn("size-24 rounded bg-muted overflow-hidden shrink-0 flex items-center justify-center", dragOver && "bg-accent/50", previewClassName)}>
+        <div className={cn("size-24 rounded bg-white overflow-hidden shrink-0 flex items-center justify-center", dragOver && "bg-white/50", previewClassName)}>
           {internalPreview ? (
             <img src={internalPreview} alt="Selected image preview" className="w-full h-full object-contain" />
           ) : (

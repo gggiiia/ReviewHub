@@ -16,18 +16,19 @@ interface PlanCardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function PlanCard({ plan, className, onEdit, onDelete, ...props }: PlanCardProps) {
   return (
-    <div className={cn("border rounded-md p-3 flex items-center gap-3 transition-colors", className)} {...props}>
+    <div className={cn("border rounded-md p-3 flex items-center gap-3 transition-colors min-w-0", className)} {...props}>
       <ContrastBadge color={plan.color} className="size-12 text-xl rounded flex items-center justify-center font-semibold select-none">
         {plan.name.charAt(0).toUpperCase()}
       </ContrastBadge>
       <div className="min-w-0 flex-1">
         <div className="font-medium truncate flex items-center gap-2">
           <span className="truncate">{plan.name}</span>
+        </div>
+        <div className="flex items-center gap-2 ml-auto mt-2">
             <ContrastBadge color={plan.color}>
                 ${plan.price}/mo
             </ContrastBadge>
-        </div>
-        <div className="flex items-center gap-2 ml-auto mt-2">
+            <div className={"mr-auto"}/>
           <EditPlanDialog plan={plan} onSubmit={(updated)=> onEdit?.(updated)}>
             <Button type="button" variant="outline" size="sm" aria-label="Edit plan">
               <Pencil className="size-4" />

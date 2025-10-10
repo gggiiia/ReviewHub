@@ -1,5 +1,5 @@
 import React from 'react';
-import useIsDesktop from "@/lib/hooks.ts";
+import {useIsDesktop} from "@/lib/hooks.ts";
 
 
 /**

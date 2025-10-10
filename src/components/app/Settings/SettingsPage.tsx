@@ -20,6 +20,7 @@ import {
 import {saveSettings, toggleFacebook, toggleGoogle, useSettings} from "@/services/SettingsService.ts";
 import {FacebookIcon} from "@/components/ui/icons/facebookIcon.tsx";
 import {GoogleIcon} from "@/components/ui/icons/googleIcon.tsx";
+import {Label} from "@/components/ui/label.tsx";
 
 interface SettingsForm {
     notifEmail: boolean
@@ -180,18 +181,18 @@ export function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <label className="flex items-center justify-between gap-4 border rounded-lg p-3">
+                    <Label className="flex items-center justify-between gap-4 border rounded-lg p-3">
                         <span>Email alerts</span>
                         <Checkbox checked={notifEmail} onCheckedChange={(v)=>{ const val = v === true; setValue('notifEmail', val, {shouldDirty:true}); saveSettings({notifEmail: val}); }} />
-                    </label>
-                    <label className="flex items-center justify-between gap-4 border rounded-lg p-3">
+                    </Label>
+                    <Label className="flex items-center justify-between gap-4 border rounded-lg p-3">
                         <span>SMS alerts</span>
                         <Checkbox checked={notifSms} onCheckedChange={(v)=>{ const val = v === true; setValue('notifSms', val, {shouldDirty:true}); saveSettings({notifSms: val}); }} />
-                    </label>
-                    <label className="flex items-center justify-between gap-4 border rounded-lg p-3">
+                    </Label>
+                    <Label className="flex items-center justify-between gap-4 border rounded-lg p-3">
                         <span>Push notifications</span>
                         <Checkbox checked={notifPush} onCheckedChange={(v)=>{ const val = v === true; setValue('notifPush', val, {shouldDirty:true}); saveSettings({notifPush: val}); }} />
-                    </label>
+                    </Label>
                     <div className="flex items-center justify-between gap-4 border rounded-lg p-3">
                         <span className="mr-4">Digest frequency</span>
                         <div>
@@ -227,14 +228,14 @@ export function SettingsPage() {
                     <ImageInput label="Profile picture" value={avatar} onChange={(v)=>setValue('avatar', v ?? '', {shouldDirty:true})} helperText="PNG, JPG. Drag & drop or click to upload."/>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label className="text-sm font-medium" htmlFor="fullName">Full name</label>
+                            <Label className="text-sm font-medium" htmlFor="fullName">Full name</Label>
                             <Input id="fullName" aria-invalid={!!errors.fullName} placeholder="Your full name" {...register('fullName', {required: 'Full name is required', minLength: {value: 2, message: 'Name is too short'}})} />
                             {errors.fullName && (
                                 <TypographyP className="text-destructive text-sm mt-1">{errors.fullName.message}</TypographyP>
                             )}
                         </div>
                         <div>
-                            <label className="text-sm font-medium" htmlFor="email">Email</label>
+                            <Label className="text-sm font-medium" htmlFor="email">Email</Label>
                             <Input id="email" type="email" aria-invalid={!!errors.email} placeholder="you@example.com" {...register('email', {required: 'Email is required', pattern: {value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Enter a valid email'}})} />
                             {errors.email && (
                                 <TypographyP className="text-destructive text-sm mt-1">{errors.email.message}</TypographyP>

@@ -20,8 +20,6 @@ function NavBarLink(props: NavBarNavLinkProps) {
 
     if(props.isDisabled && props.isDisabled()) return null
 
-    console.log("NavBarLink",props.isDisabled)
-
     return <Link to={props.path} className={cn("block p-4", isSelectedClass)}>
         {iconMap[props.label]}
     </Link>

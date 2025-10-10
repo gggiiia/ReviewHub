@@ -5,6 +5,7 @@ import {Textarea} from "@/components/ui/textarea.tsx";
 import {useForm} from "react-hook-form";
 import {useLocations} from "@/services/LocationsService.ts";
 import { Star as StarIcon } from "lucide-react";
+import {Label} from "@/components/ui/label.tsx";
 
 interface PrivateFormValues {
     name: string;
@@ -156,7 +157,7 @@ export function LandingPreview() {
             <form onSubmit={onSubmitPrivate} noValidate>
                 <div className="flex flex-col gap-3">
                     <div>
-                        <label htmlFor="name" className="block text-sm font-medium mb-1">Name</label>
+                        <Label htmlFor="name" className="block text-sm font-medium mb-1">Name</Label>
                         <Input
                             id="name"
                             aria-invalid={!!errors.name}
@@ -166,7 +167,7 @@ export function LandingPreview() {
                         {errors.name && <div className="text-destructive text-sm mt-1">{errors.name.message}</div>}
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
+                        <Label htmlFor="email" className="block text-sm font-medium mb-1">Email</Label>
                         <Input
                             id="email"
                             type="email"
@@ -183,7 +184,7 @@ export function LandingPreview() {
                         {errors.email && <div className="text-destructive text-sm mt-1">{errors.email.message}</div>}
                     </div>
                     <div>
-                        <label htmlFor="message" className="block text-sm font-medium mb-1">Message</label>
+                        <Label htmlFor="message" className="block text-sm font-medium mb-1">Message</Label>
                         <Textarea
                             id="message"
                             rows={5}

@@ -16,6 +16,7 @@ import {ImageInput} from "@/components/ui/image-input.tsx"
 import IsDesktop from "@/components/ui/isDesktop.tsx";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select.tsx";
 import type {Client, PlanType} from "@/services/ClientsService.ts";
+import {Label} from "@/components/ui/label.tsx";
 
 export interface EditClientData {
   name: string
@@ -74,7 +75,7 @@ export function EditClientDialog({ children, client, plans, title = "Edit client
         <form onSubmit={handleSubmit(submit)} className="space-y-4">
           <div className="space-y-2">
             <div>
-              <label htmlFor="name" className="text-sm font-medium">Name</label>
+              <Label htmlFor="name" className="text-sm font-medium">Name</Label>
               <Input id="name" placeholder="Client name" aria-invalid={!!errors.name}
                      {...register("name", { required: "Name is required", minLength: { value: 2, message: "Name is too short" } })}
               />
@@ -91,7 +92,7 @@ export function EditClientDialog({ children, client, plans, title = "Edit client
               helperText="PNG, JPG, or GIF. Drag and drop or click to select."
             />
             <div>
-              <label htmlFor="plan" className="text-sm font-medium">Plan</label>
+              <Label htmlFor="plan" className="text-sm font-medium">Plan</Label>
               <Select value={watch("planId")} onValueChange={(v)=> setValue("planId", v, {shouldDirty: true})}>
                 <SelectTrigger id="plan">
                   <SelectValue placeholder="Select a plan" />

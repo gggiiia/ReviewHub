@@ -14,7 +14,7 @@ const initialReviews: ReviewItem[] = [
     reply: "Thank you, Alice! We appreciate your kind words and hope to see you again soon.",
     source: "google",
   },
-  {
+  /*{
     id: "r1b",
     author: "Very Long Reviewer Name That Still Reads Well",
     rating: 5,
@@ -22,7 +22,7 @@ const initialReviews: ReviewItem[] = [
     text:
       "This is a very long review intended to test wrapping, truncation, and overall layout stability across multiple components including ReviewCard, WidgetCarousel, WidgetFeed, and WidgetMasonry. From the moment I walked in, I was impressed by the cleanliness, the attention to detail, and the genuine warmth of the staff. The ordering process was straightforward, the explanations were clear, and every recommendation turned out to be spot on. I particularly appreciated how the team anticipated questions before I even had to ask them—something that speaks to both experience and care. Over the course of my visit, I interacted with several team members and each of them provided consistent, high‑quality service. The product quality was equally impressive: well‑made, thoughtfully presented, and exactly as described. Beyond the core experience, small touches like prompt follow‑ups, a welcoming atmosphere, and an obvious commitment to continuous improvement made a big difference. I’ve visited similar places in the past, but this one genuinely stands out for its blend of professionalism and personality. I left feeling confident, satisfied, and eager to return. If you’re on the fence, take this as your sign to give them a try—you’ll likely walk away with the same positive impression. Kudos to the entire team for an exceptional experience from start to finish!",
     source: "google",
-  },
+  },*/
   { id: "r2", author: "Bob Smith", rating: 4, date: "2025-08-01", text: "Great overall. A small wait during peak hours, but totally worth it.", source: "facebook" },
   {
     id: "r3",

@@ -36,7 +36,7 @@ export function LocationCard({ location, className, onEdit, onDelete, ...props }
     }
 
     return (
-    <div className={cn("border rounded-md p-3 flex items-center gap-3 transition-colors",isSelectedClass, className)} {...props}>
+    <div className={cn("border rounded-md p-3 flex items-center gap-3 transition-colors min-w-0",isSelectedClass, className)} {...props}>
       {showImage ? (
         <img
           src={avatarUrl}

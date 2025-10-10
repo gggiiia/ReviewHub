@@ -7,6 +7,7 @@ import {Input} from "@/components/ui/input.tsx";
 import {useLocations} from "@/services/LocationsService.ts";
 import {SharePreview} from "@/components/app/share/SharePreview.tsx";
 import { shareActions, useShare } from "@/services/ShareService.ts";
+import {Label} from "@/components/ui/label.tsx";
 
 
 export function Share() {
@@ -81,13 +82,13 @@ export function Share() {
         <CardContent>
           <div className="flex flex-col max-w-[420px] m-auto gap-4 items-center Create selector">
               <div className="flex flex-col gap-3 w-full">
-                  <label className="text-sm font-medium">Background color</label>
+                  <Label className="text-sm font-medium">Background color</Label>
                   <div className="flex items-center gap-2">
                       <input
                           type="color"
                           value={bgColor}
                           onChange={(e) => shareActions.setBgColor(e.target.value)}
-                          className="h-10 w-10 rounded border p-0"
+                          className="h-10 w-10 rounded border p-1"
                           aria-label="Pick background color"
                       />
                       <Input value={bgColor} onChange={(e) => shareActions.setBgColor(e.target.value)} aria-label="Background color hex" />

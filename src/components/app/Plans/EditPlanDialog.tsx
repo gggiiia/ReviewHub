@@ -14,6 +14,7 @@ import {Input} from "@/components/ui/input.tsx"
 import {TypographyP} from "@/components/ui/Typography.tsx"
 import type {Plan} from "@/services/PlansService.ts"
 import IsDesktop from "@/components/ui/isDesktop.tsx";
+import {Label} from "@/components/ui/label.tsx";
 
 export interface PlanFormValues {
   name: string
@@ -66,7 +67,7 @@ export function EditPlanDialog({children, plan, title = "Edit plan", onSubmit}: 
         <form onSubmit={handleSubmit(submit)} className="space-y-4">
           <div className="space-y-2">
             <div>
-              <label htmlFor="name" className="text-sm font-medium">Name</label>
+              <Label htmlFor="name" className="text-sm font-medium">Name</Label>
               <Input id="name" placeholder="Plan name" aria-invalid={!!errors.name}
                      {...register("name", { required: "Name is required", minLength: { value: 2, message: "Name is too short" } })}
               />
@@ -75,13 +76,13 @@ export function EditPlanDialog({children, plan, title = "Edit plan", onSubmit}: 
               )}
             </div>
             <div>
-              <label htmlFor="price" className="text-sm font-medium">Monthly price (USD)</label>
+              <Label htmlFor="price" className="text-sm font-medium">Monthly price (USD)</Label>
               <Input id="price" type="number" step="1" placeholder="0" aria-invalid={!!errors.price}
                      {...register("price", { valueAsNumber: true, min: { value: 0, message: "Price cannot be negative" } })}
               />
             </div>
             <div>
-              <label htmlFor="color" className="text-sm font-medium">Color</label>
+              <Label htmlFor="color" className="text-sm font-medium">Color</Label>
               <div className="flex items-center gap-2">
                 <Input
                     className={"h-10 w-10 p-1"}

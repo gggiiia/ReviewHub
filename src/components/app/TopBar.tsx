@@ -103,15 +103,12 @@ export function TopBar() {
 
     const {mode} = useRoutingState()
     const {routes} = useTopBar()
-    const navigate = useNavigate()
 
     useEffect(() => {
         if (mode === "agency") {
             topBarActions.initTopBarLinks(agencyModeLinks)
-            navigate("/Clients")
         } else {
             topBarActions.initTopBarLinks(businessModeLinks)
-            navigate("/Reviews")
         }
     }, [mode]);
 

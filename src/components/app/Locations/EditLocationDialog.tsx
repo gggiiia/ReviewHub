@@ -15,6 +15,7 @@ import {TypographyP} from "@/components/ui/Typography.tsx"
 import {ImageInput} from "@/components/ui/image-input.tsx"
 import type {LocationItem} from "@/components/app/Locations/LocationCard.tsx"
 import IsDesktop from "@/components/ui/isDesktop.tsx";
+import {Label} from "@/components/ui/label.tsx";
 
 export interface EditLocationData {
   name: string
@@ -73,7 +74,7 @@ export function EditLocationDialog({ children, location, title = "Edit location"
         <form onSubmit={handleSubmit(submit)} className="space-y-4">
           <div className="space-y-2">
             <div>
-              <label htmlFor="name" className="text-sm font-medium">Name</label>
+              <Label htmlFor="name" className="text-sm font-medium">Name</Label>
               <Input id="name" placeholder="Location name" aria-invalid={!!errors.name}
                      {...register("name", { required: "Name is required", minLength: { value: 2, message: "Name is too short" } })}
               />

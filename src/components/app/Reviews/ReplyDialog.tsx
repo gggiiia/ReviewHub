@@ -12,6 +12,7 @@ import {
 import {Button} from "@/components/ui/button.tsx"
 import {Textarea} from "@/components/ui/textarea.tsx"
 import {TypographyP} from "@/components/ui/Typography.tsx"
+import {Label} from "@/components/ui/label.tsx";
 
 export interface ReviewItemData {
     id: string
@@ -119,7 +120,7 @@ export function ReplyDialog({review, children, onSubmit, title = "Reply to revie
 
                 <form onSubmit={handleSubmit(submit)} className="space-y-3 mt-3">
                     <div>
-                        <label htmlFor="reply" className="text-sm font-medium">Your reply</label>
+                        <Label htmlFor="reply" className="text-sm font-medium">Your reply</Label>
                         <Textarea
                             id="reply"
                             placeholder="Write your reply..."
