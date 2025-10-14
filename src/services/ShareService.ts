@@ -7,7 +7,7 @@ interface ShareState {
   bgColor: string;
 }
 
-const DEFAULT_BG = "#0ea5e9"; // brandy blue default
+const DEFAULT_BG = "#ffffff"; // brandy blue default
 
 export const shareState = proxy<ShareState>({
   bgColor: DEFAULT_BG,

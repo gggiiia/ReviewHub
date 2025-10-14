@@ -1,8 +1,9 @@
-import {useTopBar} from "@/services/TopBarService.tsx";
+import {topBarActions, useTopBar} from "@/services/TopBarService.tsx";
 import {cn} from "@/lib/utils.ts";
 import {Link, useLocation} from "react-router";
-import {agencyRoutingIconMap, businessRoutingIconMap} from "@/routes/router.tsx";
+import {agencyModeLinks, agencyRoutingIconMap, businessModeLinks, businessRoutingIconMap} from "@/routes/router.tsx";
 import {useRoutingState} from "@/services/RoutingState.ts";
+import {useEffect} from "react";
 
 
 interface NavBarNavLinkProps {
@@ -27,6 +28,15 @@ function NavBarLink(props: NavBarNavLinkProps) {
 
 export function NavBar() {
     const {routes} = useTopBar()
+    const {mode} = useRoutingState()
+
+    useEffect(() => {
+        if (mode === "agency") {
+            topBarActions.initTopBarLinks(agencyModeLinks)
+        } else {
+            topBarActions.initTopBarLinks(businessModeLinks)
+        }
+    }, [mode]);
 
     return <div className={"flex flex-row gap-2 justify-around"}>
         {
