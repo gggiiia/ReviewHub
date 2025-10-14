@@ -6,6 +6,8 @@ import {TagTextarea} from "@/components/ui/TagTextarea.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {useLocations} from "@/services/LocationsService.ts";
 import {SendHorizontal} from "lucide-react";
+import {useForm} from "react-hook-form";
+import type {NewClientData} from "@/components/app/Clients/CreateClientDialog.tsx";
 
 const EmailTemplate = `
 Hi [[Name]],
@@ -20,9 +22,38 @@ Reviews allow our business to grow, you'd be giving us a big hand!
 
 Thanks!`
 
+interface SendEmailForm {
+    name: string
+    email: string
+    sender: string
+    subject: string
+    message: string
+}
+
 export function SendEmail() {
 
     const {selectedLocation} = useLocations()
+    const {
+        register,
+        handleSubmit,
+        formState: {errors, isSubmitting, isDirty},
+        watch,
+        reset,
+        setValue
+    } = useForm<SendEmailForm>({
+        defaultValues: {
+            name: "",
+            email: "",
+            sender: selectedLocation?.name,
+            subject: "Leave us a review",
+            message: EmailTemplate
+        }
+    })
+
+
+    function onSubmit(values: NewClientData) {
+        console.log(values)
+    }
 
     return <Card>
         <CardHeader>
@@ -35,11 +66,11 @@ export function SendEmail() {
             <div className={"flex gap-2"}>
                 <div className={"w-full"}>
                     <Label>Name</Label>
-                    <Input></Input>
+                    <Input {...register("name")}></Input>
                 </div>
                 <div className={"w-full"}>
                     <Label>Email</Label>
-                    <Input type={"email"}>
+                    <Input {...register("email")} type={"email"}>
 
                     </Input>
                 </div>
@@ -48,18 +79,19 @@ export function SendEmail() {
             <div className={"flex gap-2"}>
                 <div className={"w-full"}>
                     <Label>Sender name</Label>
-                    <Input value={selectedLocation?.name}/>
+                    <Input {...register("sender")}/>
                 </div>
                 <div className={"w-full"}>
                     <Label>Subject</Label>
-                    <Input value={"Leave us a review"}/>
+                    <Input {...register("subject")}/>
                 </div>
             </div>
 
             <div>
                 <Label>Message Template</Label>
-                <TagTextarea value={EmailTemplate}
-                             onChange={(value) => console.log(value)}
+                <TagTextarea
+                             onChange={(value) => setValue("message",value,{shouldDirty:true})}
+                             value={watch("message")}
                              tags={[
                                  {label: "company name", value: "Company name"},
                                  {label: "name", value: "Name"},
@@ -70,7 +102,7 @@ export function SendEmail() {
         </CardContent>
         <CardFooter>
             <div className={"mr-auto"}/>
-            <Button>
+            <Button disabled={!isDirty} onClick={handleSubmit(onSubmit)}>
                 <SendHorizontal/>
                 Send Message
             </Button>
