@@ -5,6 +5,7 @@ import {Separator} from "@/components/ui/separator.tsx";
 import {TagTextarea} from "@/components/ui/TagTextarea.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {SendHorizontal} from "lucide-react";
+import {useForm} from "react-hook-form";
 
 const WhatsappTemplate = `Hi [[Name]],
                 
@@ -21,7 +22,32 @@ To leave a review, click the link below, the link is only clickable if we are a 
 Thanks!
 `
 
+interface SendWhatsappForm {
+    name: string
+    phone: string
+    message: string
+}
+
 export const SendWhatsapp = () => {
+
+    const {
+        register,
+        handleSubmit,
+        formState: {errors, isSubmitting, isDirty},
+        watch,
+        reset,
+        setValue
+    } = useForm<SendWhatsappForm>({
+        defaultValues: {
+            name: "",
+            phone: "",
+            message: WhatsappTemplate
+        }
+    })
+
+    function onSubmit(values: SendWhatsappForm) {
+    }
+
     return <Card>
         <CardHeader>
             <CardTitle>Whatsapp</CardTitle>
@@ -33,11 +59,11 @@ export const SendWhatsapp = () => {
             <div className={"flex gap-2"}>
                 <div className={"w-full"}>
                     <Label>Name</Label>
-                    <Input></Input>
+                    <Input {...register("name")}></Input>
                 </div>
                 <div className={"w-full"}>
                     <Label>Phone</Label>
-                    <Input type={"tel"}>
+                    <Input {...register("phone")} type={"tel"}>
 
                     </Input>
                 </div>
@@ -47,7 +73,7 @@ export const SendWhatsapp = () => {
             <div>
                 <Label>Message Template</Label>
                 <TagTextarea value={WhatsappTemplate}
-                             onChange={(value) => console.log(value)}
+                             onChange={(value) => setValue("message", value, {shouldDirty: true})}
                              tags={[
                                  {label: "company name", value: "Company name"},
                                  {label: "name", value: "Name"},
@@ -58,7 +84,7 @@ export const SendWhatsapp = () => {
         </CardContent>
         <CardFooter>
             <div className={"mr-auto"}/>
-            <Button>
+            <Button disabled={!isDirty} onClick={handleSubmit(onSubmit)}>
                 <SendHorizontal/>
                 Send Message
             </Button>

@@ -24,11 +24,6 @@ export const designActions = {
          const root = document.documentElement;
 
          const newVariables = generateThemeVariables(color);
-
-         shareState.bgColor = color
-
-         console.log("designActions",newVariables)
-
          // B. Loop through the generated variables and assign them to the root's style property
          for (const [variable, value] of Object.entries(newVariables)) {
              // The setProperty method dynamically updates the CSS variable on the <html> element
