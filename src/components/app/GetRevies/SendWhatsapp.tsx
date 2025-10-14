@@ -46,6 +46,7 @@ export const SendWhatsapp = () => {
     })
 
     function onSubmit(values: SendWhatsappForm) {
+        console.log(values)
     }
 
     return <Card>
