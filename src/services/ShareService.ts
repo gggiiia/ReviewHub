@@ -1,6 +1,6 @@
 import {proxy, subscribe} from "valtio/vanilla";
 import { useSnapshot } from "valtio/react";
-import {DesignService} from "@/services/DesignService.ts";
+import {designService} from "@/services/DesignService.ts";
 import {generateThemeVariables} from "@/lib/colors.ts";
 
 interface ShareState {

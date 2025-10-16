@@ -105,7 +105,7 @@ export function ImageInput({
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
       >
-        <div className={cn("size-24 rounded bg-white overflow-hidden shrink-0 flex items-center justify-center", dragOver && "bg-white/50", previewClassName)}>
+        <div className={cn("size-24 rounded bg-accent overflow-hidden shrink-0 flex items-center justify-center", dragOver && "bg-white/50", previewClassName)}>
           {internalPreview ? (
             <img src={internalPreview} alt="Selected image preview" className="w-full h-full object-contain" />
           ) : (

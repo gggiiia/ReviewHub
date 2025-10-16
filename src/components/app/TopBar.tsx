@@ -11,7 +11,9 @@ import {TooltipContent} from "@radix-ui/react-tooltip";
 import React, {useEffect} from "react";
 import {routingActions, useRoutingState} from "@/services/RoutingState.ts";
 import {agencyModeLinks, businessModeLinks} from "@/routes/router.tsx";
-import {designActions} from "@/services/DesignService.ts";
+import {designActions, useDesign} from "@/services/DesignService.ts";
+import IsDesktop from "@/components/ui/isDesktop.tsx";
+import IsMobile from "@/components/ui/isMobile.tsx";
 
 
 function BusinessSelect() {
@@ -99,8 +101,16 @@ function SwitchToAgentModeButton() {
     </Button>
 }
 
-export function TopBar() {
+function Logo() {
+    const {logo} = useDesign()
+    const {mode} = useRoutingState()
 
+    if (mode === "agency") return null
+
+    return <img className={"h-12 min-w-12 max-w-32 w-fit object-contain text-start rounded-xl"} src={logo} alt=""/>
+}
+
+export function TopBar() {
     const {mode} = useRoutingState()
     const {routes} = useTopBar()
 
@@ -113,18 +123,24 @@ export function TopBar() {
     }, [mode]);
 
     return <Card className={'p-2 2xl:px-24 overflow-visible w-full z-50'}>
-        <div className={'flex gap-4 items-center p-2'}>
-            <SwitchToAgentModeButton/>
-            {
-                mode === "business" && <BusinessSelect/>
-            }
-            <div className={'w-full'}></div>
+        <IsDesktop>
+            <div className={'flex gap-4 items-center p-2'}>
+                <SwitchToAgentModeButton/>
+                <Logo></Logo>
+                {
+                    mode === "business" && <BusinessSelect/>
+                }
+                <div className={'w-full'}></div>
 
-            {routes.map(({path, label}) => (
-                <div key={path}>
-                    <TopBarNavLink path={path} label={label}/>
-                </div>
-            ))}
-        </div>
+                {routes.map(({path, label}) => (
+                    <div key={path}>
+                        <TopBarNavLink path={path} label={label}/>
+                    </div>
+                ))}
+            </div>
+        </IsDesktop>
+        <IsMobile>
+            <Logo></Logo>
+        </IsMobile>
     </Card>
 }
