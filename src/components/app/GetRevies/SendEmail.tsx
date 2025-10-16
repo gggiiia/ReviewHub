@@ -63,7 +63,7 @@ export function SendEmail() {
             </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6">
-            <div className={"flex gap-2"}>
+            <div className={"flex flex-col lg:flex-row gap-2"}>
                 <div className={"w-full"}>
                     <Label>Name</Label>
                     <Input {...register("name")}></Input>
@@ -76,7 +76,7 @@ export function SendEmail() {
                 </div>
             </div>
             <Separator/>
-            <div className={"flex gap-2"}>
+            <div className={"flex flex-col lg:flex-row  gap-2"}>
                 <div className={"w-full"}>
                     <Label>Sender name</Label>
                     <Input {...register("sender")}/>

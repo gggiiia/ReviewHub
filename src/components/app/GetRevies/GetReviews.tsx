@@ -9,6 +9,7 @@ import {useState} from "react";
 import {SendEmail} from "@/components/app/GetRevies/SendEmail.tsx";
 import {SendSms} from "@/components/app/GetRevies/SendSms.tsx";
 import {SendWhatsapp} from "@/components/app/GetRevies/SendWhatsapp.tsx";
+import {Mail, MessageCircle, MessageSquare} from "lucide-react";
 
 export function GetReviews() {
 
@@ -23,9 +24,9 @@ export function GetReviews() {
 
         <Tabs defaultValue="Email">
             <TabsList>
-                <TabsTrigger value="Email">Email</TabsTrigger>
-                <TabsTrigger value="Sms">SMS</TabsTrigger>
-                <TabsTrigger value="whatsapp">Whatsapp</TabsTrigger>
+                <TabsTrigger className={"cursor-pointer"} value="Email"><Mail />Email</TabsTrigger>
+                <TabsTrigger className={"cursor-pointer"} value="Sms"><MessageSquare />SMS</TabsTrigger>
+                <TabsTrigger className={"cursor-pointer"} value="whatsapp"><MessageCircle />Whatsapp</TabsTrigger>
             </TabsList>
             <TabsContent value="Email">
                 <SendEmail/>
