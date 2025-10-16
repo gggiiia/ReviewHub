@@ -1,4 +1,4 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect, useCallback, type RefObject} from 'react';
 
 /**
  * Custom hook to determine if the screen size meets the desktop criteria (>= 1024px).
@@ -50,11 +50,11 @@ export function useIframeMessageListener<T>() {
     // Check if the current window is *not* the top-level window (i.e., it's inside an iframe)
     const isInsideIframe = window.self !== window.top;
 
-    const [latestMessage, setLatestMessage] = useState<T>(null);
-    const [messageError, setMessageError] = useState(null);
+    const [latestMessage, setLatestMessage] = useState<T | null>(null);
+    const [messageError, setMessageError] = useState<string | null>("");
 
     // The main message handler logic
-    const handleMessage = useCallback((event) => {
+    const handleMessage = useCallback((event:MessageEvent) => {
         // Basic security check: Consider restricting origins (e.g., if (event.origin !== "http://expected-domain.com"))
         // For this example, we'll process the message regardless of origin.
 
@@ -78,8 +78,10 @@ export function useIframeMessageListener<T>() {
                 }
             } catch (e) {
                 // JSON parsing failed
-                setMessageError(`Error parsing message data as JSON: ${e.message}`);
-                setLatestMessage(null);
+                if (e instanceof Error) {
+                    setMessageError(`Error parsing message data as JSON: ${e.message}`);
+                    setLatestMessage(null);
+                }
             }
         } else {
             // Data is not a string (e.g., an object sent directly via postMessage)
@@ -133,13 +135,13 @@ export function useIframeCommunicator(targetOrigin = '*')  {
     const isInsideIframe = window.self !== window.top;
 
     const [latestMessage, setLatestMessage] = useState(null);
-    const [messageError, setMessageError] = useState(null);
+    const [messageError, setMessageError] = useState("");
 
     // --- Receiving Logic (Same as before, for when the app is *inside* an iframe) ---
 
-    const handleMessage = useCallback((event) => {
+    const handleMessage = useCallback((event:MessageEvent) => {
         // Security Note: In a real app, you should validate event.origin here.
-        setMessageError(null);
+        setMessageError("");
 
         if (typeof event.data === 'string') {
             try {
@@ -151,8 +153,10 @@ export function useIframeCommunicator(targetOrigin = '*')  {
                     setLatestMessage(null);
                 }
             } catch (e) {
-                setMessageError(`Error parsing message data as JSON: ${e.message}`);
-                setLatestMessage(null);
+                if (e instanceof Error) {
+                    setMessageError(`Error parsing message data as JSON: ${e.message}`);
+                    setLatestMessage(null)
+                }
             }
         } else {
             setMessageError('Received message data is not a string (expected JSON string).');
@@ -178,7 +182,7 @@ export function useIframeCommunicator(targetOrigin = '*')  {
      * @param {React.RefObject<HTMLIFrameElement>} iframeRef A ref attached to the target <iframe> element.
      * @param {Object} data The object to be stringified and sent.
      */
-    const sendMessage = useCallback((iframeRef, data) => {
+    const sendMessage = useCallback((iframeRef:RefObject<HTMLIFrameElement>, data: never) => {
         if (!iframeRef || !iframeRef.current) {
             console.error('Iframe reference is missing or invalid.');
             return;

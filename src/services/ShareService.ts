@@ -1,7 +1,5 @@
-import {proxy, subscribe} from "valtio/vanilla";
-import { useSnapshot } from "valtio/react";
-import {designService} from "@/services/DesignService.ts";
-import {generateThemeVariables} from "@/lib/colors.ts";
+import {proxy} from "valtio/vanilla";
+import {useSnapshot} from "valtio/react";
 
 interface ShareState {
   bgColor: string;

@@ -48,7 +48,7 @@ const plansState = proxy<PlansState>({
 })
 
 export const plansActions = {
-  create(plan: Omit<Plan, "id">) {
+  create(plan: Plan) {
     const id = plan.id ?? uid()
     const newItem: Plan = { ...plan, id }
     plansState.plans = [newItem, ...plansState.plans]

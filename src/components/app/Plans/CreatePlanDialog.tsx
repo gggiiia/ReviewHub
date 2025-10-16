@@ -1,4 +1,4 @@
-import {ReactNode, useState} from "react"
+import {type ReactNode, useState} from "react"
 import {useForm} from "react-hook-form"
 import {
   Dialog,

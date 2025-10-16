@@ -137,7 +137,7 @@ function hexToRgb(hex:string) {
  * @param {number[]} rgb - An array of [R, G, B] values (0-255).
  * @returns {number} - The luminance value (0-255).
  */
-function getLuminance([r, g, b]) {
+function getLuminance([r, g, b]: [number,number,number]) {
     // Formula for perceived brightness (recommened by W3C for accessibility)
     // See: https://www.w3.org/TR/AERT/#color-contrast
     return (0.299 * r + 0.587 * g + 0.114 * b);
@@ -148,7 +148,7 @@ function getLuminance([r, g, b]) {
  * @param {string} backgroundColor - The background color string (e.g., "#RRGGBB" or "R, G, B").
  * @returns {string} - The Tailwind CSS class for the contrast text color ("text-white" or "text-black").
  */
-export function getContrastTextColorClass(backgroundColor) {
+export function getContrastTextColorClass(backgroundColor:string) {
     let rgb;
 
     // Check if it's a hex color
@@ -170,7 +170,7 @@ export function getContrastTextColorClass(backgroundColor) {
         rgb = [0, 0, 0]; // Default to black
     }
 
-    const luminance = getLuminance(rgb);
+    const luminance = getLuminance(rgb as [number, number, number]);
 
     // A common threshold for light/dark is 128 (half of 256)
     // If luminance is > 186, it's considered light, so use black text.

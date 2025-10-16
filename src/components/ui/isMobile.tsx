@@ -1,11 +1,11 @@
-import React from 'react';
+import {type PropsWithChildren} from 'react';
 import {useIsDesktop} from "@/lib/hooks.ts";
 
 /**
  * Component that renders its children only on mobile/tablet screens (< 1024px).
  * (Essentially, when useIsDesktop is false).
  */
-const IsMobile = ({ children }) => {
+const IsMobile = ({ children }:PropsWithChildren) => {
     const isDesktop = useIsDesktop();
 
     // It's considered 'mobile' if it's NOT desktop

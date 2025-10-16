@@ -103,7 +103,7 @@ export function DesignPreview() {
                 <div className="w-full h-full mx-auto">
                     <div className="relative w-full h-full overflow-hidden rounded-lg border">
                         <iframe ref={iframeRef} className={"w-full h-full"}
-                                src="http://localhost:3000/Reviews"></iframe>
+                                src={window.location.href}></iframe>
                     </div>
                 </div>
             </CardContent>

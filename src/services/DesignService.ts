@@ -13,7 +13,7 @@ export type DesignService = {
 export const designService = proxy<DesignService>({
     theme: "light",
     primaryColor: "#000000",
-    logo: faker.image.url({width: 100, height: 40})
+    logo: faker.image.avatar()
 })
 
 export const designActions = {

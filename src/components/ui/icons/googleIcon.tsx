@@ -1,6 +1,6 @@
-import React from "react";
+import React, {type SVGProps} from "react";
 
-export function GoogleIcon(props) {
+export function GoogleIcon(props:SVGProps<SVGElement>) {
     return <svg {...props} width="18" height="18" viewBox="0 0 256 262" aria-hidden="true">
         <path fill="#4285F4"
               d="M255.9 133.5c0-10.7-.9-18.5-2.9-26.6H130.5v48.3h71.9c-1.4 12-9 30.1-25.9 42.3l-.2 1.6 37.6 29 2.6.3c24-22.1 38.4-54.7 38.4-95z"/>

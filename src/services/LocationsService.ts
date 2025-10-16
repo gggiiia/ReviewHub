@@ -1,6 +1,6 @@
 import type {LocationItem} from "@/components/app/Locations/LocationCard.tsx";
 import {faker} from "@faker-js/faker";
-import {proxy, subscribe} from "valtio/vanilla";
+import {proxy} from "valtio/vanilla";
 import {useSnapshot} from "valtio/react";
 
 function makeLocations(count: number): LocationItem[] {

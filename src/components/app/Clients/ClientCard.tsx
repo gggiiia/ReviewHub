@@ -16,6 +16,7 @@ interface ClientCardProps extends React.HTMLAttributes<HTMLDivElement> {
     plans: PlanType[]
     onEdit?: (client: Client) => void
     onDelete?: (client: Client) => void
+    client: Client
 }
 
 export function ClientCard({client, className, onEdit, onDelete, ...props}: ClientCardProps) {
