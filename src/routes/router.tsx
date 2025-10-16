@@ -18,19 +18,19 @@ export const businessModeLinks = [
     /*{label: "Share", path: "/Share", element: <Share/>},*/
     {label: "Get", path: "/Get", element: <GetReviews/>},
     {label: "Widgets", path: "/Widgets", element: <Widgets/>},
-    {label: "Settings", path: "/Settings", element:<SettingsPage/>}
+    {label: "Settings", path: "/Settings", element: <SettingsPage/>}
 ]
 
 export const agencyModeLinks = [
     {label: "Plans", path: "/Plans", element: <Plans/>},
     {label: "Clients", path: "/Clients", element: <Clients/>},
     {label: "Design", path: "/Design", element: <Design/>},
-    {label: "Settings", path: "/Settings", element:<SettingsPage/>}
+    {label: "Settings", path: "/Settings", element: <SettingsPage/>}
 ]
 
 export const agencyRoutingIconMap = {
-    Plans: <BadgeDollarSign />,
-    Clients: <Users />,
+    Plans: <BadgeDollarSign/>,
+    Clients: <Users/>,
     Design: <Settings/>,
     Settings: <Settings/>,
 }
@@ -40,19 +40,20 @@ export const businessRoutingIconMap = {
     Locations: <MapPin/>,
     Landing: <PanelTop/>,
     /*Share: <Share2/>,*/
-    Get: <MessageCircleMore />,
+    Get: <MessageCircleMore/>,
     Widgets: <Grid2x2/>,
     Settings: <Settings/>,
 }
 
-export const router =  createBrowserRouter([
-    {
-        path: "/",
-        element: <App/>,
-        children: [...agencyModeLinks,...businessModeLinks]
-    },
+export const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <App/>,
+            children: [...agencyModeLinks, ...businessModeLinks]
+        },
 
-]);
+    ],
+    {basename: "/ReviewHub/"});
 
 
 export function MainRouter() {
