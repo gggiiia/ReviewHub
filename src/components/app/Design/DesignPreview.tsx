@@ -56,21 +56,13 @@ export function DesignPreview() {
         setValue("color", color, {shouldDirty: true})
     }
 
-    return <div className={"flex items-start gap-4 h-full"}>
+    return <div className={"flex flex-col lg:flex-row items-start gap-4 h-full"}>
         <div className="flex flex-col gap-4">
-            <div>
-                <div className={"flex items-center gap-2"}>
-                    <ImageInput value={logo} onChange={setLogo} label={"Logo"}/>
-                </div>
-            </div>
+            <ImageInput value={logo} onChange={setLogo} label={"Logo"}/>
 
-            <div>
-                <div className={"flex items-center gap-2"}>
-                    <ImageInput value={favicon} onChange={setFavicon} label={"Favicon"}/>
-                </div>
-            </div>
+            <ImageInput value={favicon} onChange={setFavicon} label={"Favicon"}/>
 
-            <div>
+            <div className={"w-full"}>
                 <Label>
                     Primary Color
                 </Label>
@@ -99,7 +91,7 @@ export function DesignPreview() {
                     </div>
                 </div>
             </CardHeader>
-            <CardContent className={"w-full h-full"}>
+            <CardContent className={"w-full h-[80vh] lg:h-full"}>
                 <div className="w-full h-full mx-auto">
                     <div className="relative w-full h-full overflow-hidden rounded-lg border">
                         <iframe ref={iframeRef} className={"w-full h-full"}

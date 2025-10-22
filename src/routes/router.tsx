@@ -4,7 +4,17 @@ import {Reviews} from "@/components/app/Reviews/Reviews.tsx";
 import {Locations} from "@/components/app/Locations/Locations.tsx";
 import {Landing} from "@/components/app/Landing/Landing.tsx";
 import {Widgets} from "@/components/app/Widgets/Widgets.tsx";
-import {BadgeDollarSign, Grid2x2, MapPin, MessageCircleMore, PanelTop, Settings, Star, Users} from "lucide-react";
+import {
+    BadgeDollarSign,
+    Grid2x2,
+    MapPin,
+    MessageCircleMore,
+    Paintbrush,
+    PanelTop,
+    Settings,
+    Star,
+    Users
+} from "lucide-react";
 import {SettingsPage} from "@/components/app/Settings/SettingsPage.tsx";
 import {Clients} from "@/components/app/Clients/Clients.tsx";
 import {Plans} from "@/components/app/Plans/Plans.tsx";
@@ -31,7 +41,7 @@ export const agencyModeLinks = [
 export const agencyRoutingIconMap = {
     Plans: <BadgeDollarSign/>,
     Clients: <Users/>,
-    Design: <Settings/>,
+    Design: <Paintbrush />,
     Settings: <Settings/>,
 }
 

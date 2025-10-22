@@ -80,20 +80,14 @@ export function SettingsPage() {
         console.log("Settings saved:", values)
     }
 
-    return <Page className="p-4 lg:w-1/2 lg:ml-[25%] space-y-6">
+    return <Page className="p-4 lg:w-2/3 lg:ml-[17%] xl:w-1/2 xl:ml-[25%] space-y-6">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
             <TypographyH2 className="mb-1">Settings</TypographyH2>
             <TypographyP>Manage your integrations, notifications, and account.</TypographyP>
         </div>
 
-
-
-        {/* Integrations */}
         <Card>
-
-           {/* <ThemeInput></ThemeInput>*/}
-
             <CardHeader className="flex flex-row items-start justify-between">
                 <div className="flex items-center gap-3">
                     <div className="p-2 rounded-md bg-accent text-accent-foreground"><Plug2 className="size-4"/></div>
@@ -105,8 +99,8 @@ export function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
                 {/* Facebook */}
-                <div className="flex items-center justify-between gap-4 border rounded-lg p-3">
-                    <div className="flex items-center gap-3 min-w-0">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-4 border rounded-lg p-3">
+                    <div className="flex max-w-[100%] items-center gap-3 min-w-0">
                         <FacebookIcon className="size-5"/>
                         <div className="min-w-0">
                             <TypographyH3 className="text-base">Facebook</TypographyH3>
@@ -135,8 +129,8 @@ export function SettingsPage() {
                 </div>
 
                 {/* Google */}
-                <div className="flex items-center justify-between gap-4 border rounded-lg p-3">
-                    <div className="flex items-center gap-3 min-w-0">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-4 border rounded-lg p-3">
+                    <div className="flex max-w-[100%] items-center gap-3 min-w-0">
                         <GoogleIcon className="size-5 text-emerald-600"/>
                         <div className="min-w-0">
                             <TypographyH3 className="text-base">Google</TypographyH3>
@@ -243,12 +237,15 @@ export function SettingsPage() {
                         </div>
                     </div>
                 </div>
+                <div className={"flex"}>
+                    <div className={"mr-auto"}/>
+                    <Button className={"w-full lg:w-auto"} type="submit" variant="default" size="sm" disabled={isSubmitting || !isDirty}>{isSubmitting ? "Saving..." : "Save changes"}</Button>
+                </div>
             </CardContent>
         </Card>
-        <div className="flex justify-between gap-2">
-            <Button type="button" variant="destructive" size="sm">Log Out</Button>
-            <Button type="submit" variant="default" size="sm" disabled={isSubmitting || !isDirty}>{isSubmitting ? "Saving..." : "Save changes"}</Button>
-        </div>
+        <div className="flex flex-col lg:flex-row justify-between gap-2">
+            <Button className={"text-destructive w-full lg:my-4"} type="button" variant="ghost" size="sm">Log Out</Button>
+         </div>
 
         <Dialog open={confirm.open} onOpenChange={(open)=> !open ? setConfirm({open:false, provider:null}) : undefined}>
             <DialogContent>

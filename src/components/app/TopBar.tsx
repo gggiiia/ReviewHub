@@ -14,6 +14,7 @@ import {agencyModeLinks, businessModeLinks} from "@/routes/router.tsx";
 import {designActions, useDesign} from "@/services/DesignService.ts";
 import IsDesktop from "@/components/ui/isDesktop.tsx";
 import IsMobile from "@/components/ui/isMobile.tsx";
+import NotIframe from "@/components/ui/NotIframe.tsx";
 
 
 function BusinessSelect() {
@@ -140,7 +141,12 @@ export function TopBar() {
             </div>
         </IsDesktop>
         <IsMobile>
-            <Logo></Logo>
+            <div className={"flex gap-2 items-center"}>
+                <NotIframe>
+                    <SwitchToAgentModeButton/>
+                </NotIframe>
+                <Logo></Logo>
+            </div>
         </IsMobile>
     </Card>
 }

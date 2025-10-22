@@ -41,7 +41,7 @@ function LocationsSection() {
 export function Locations() {
     const {locations} = useLocations()
 
-    return <Page className="p-4 lg:w-1/2 lg:ml-[25%]">
+    return <Page className="p-4 lg:w-2/3 lg:ml-[17%] xl:w-1/2 xl:ml-[25%]">
         <div className="flex items-center justify-between gap-2 mb-2">
             <TypographyH2 className="m-0">Locations</TypographyH2>
             <CreateLocationButton/>

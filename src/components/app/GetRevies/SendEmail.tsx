@@ -8,6 +8,7 @@ import {useLocations} from "@/services/LocationsService.ts";
 import {SendHorizontal} from "lucide-react";
 import {useForm} from "react-hook-form";
 import type {NewClientData} from "@/components/app/Clients/CreateClientDialog.tsx";
+import IsDesktop from "@/components/ui/isDesktop.tsx";
 
 const EmailTemplate = `
 Hi [[Name]],
@@ -102,9 +103,9 @@ export function SendEmail() {
         </CardContent>
         <CardFooter>
             <div className={"mr-auto"}/>
-            <Button disabled={!isDirty} onClick={handleSubmit(onSubmit)}>
+            <Button className={"w-full lg:w-auto"} disabled={!isDirty} onClick={handleSubmit(onSubmit)}>
                 <SendHorizontal/>
-                Send Message
+                Send Email
             </Button>
         </CardFooter>
     </Card>

@@ -38,7 +38,7 @@ export function NavBar() {
         }
     }, [mode]);
 
-    return <div className={"flex flex-row gap-2 justify-around"}>
+    return <div className={"flex flex-row gap-2 justify-around fixed bottom-0 w-full bg-background z-50"}>
         {
             routes.map(({path, label,isDisabled}) => (
                 <div key={path}>

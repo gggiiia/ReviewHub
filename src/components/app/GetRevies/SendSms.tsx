@@ -86,9 +86,9 @@ export function SendSms() {
         </CardContent>
         <CardFooter>
             <div className={"mr-auto"}/>
-            <Button disabled={!isDirty} onClick={handleSubmit(onSubmit)}>
+            <Button className={"w-full lg:w-auto"} disabled={!isDirty} onClick={handleSubmit(onSubmit)}>
                 <SendHorizontal />
-                Send Message
+                Send SMS
             </Button>
         </CardFooter>
     </Card>

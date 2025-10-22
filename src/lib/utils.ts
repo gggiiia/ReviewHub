@@ -61,3 +61,12 @@ export async function copyToClipboard(text: string): Promise<void> {
     document.execCommand("copy");
     document.body.removeChild(ta);
 }
+
+// utils/isInIframe.js
+export const isInIframe = () => {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true; // Assume iframe if cross-origin
+    }
+};
