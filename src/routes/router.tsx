@@ -20,6 +20,7 @@ import {Clients} from "@/components/app/Clients/Clients.tsx";
 import {Plans} from "@/components/app/Plans/Plans.tsx";
 import {Design} from "@/components/app/Design/Design.tsx";
 import {GetReviews} from "@/components/app/GetRevies/GetReviews.tsx";
+import {SettingsPageAgency} from "@/components/app/settingsAgency/SettingsAgency.tsx";
 
 export const businessModeLinks = [
     {label: "Reviews", path: "/Reviews", element: <Reviews/>},
@@ -35,7 +36,7 @@ export const agencyModeLinks = [
     {label: "Plans", path: "/Plans", element: <Plans/>},
     {label: "Clients", path: "/Clients", element: <Clients/>},
     {label: "Design", path: "/Design", element: <Design/>},
-    {label: "Settings", path: "/Settings", element: <SettingsPage/>}
+    {label: "Settings", path: "/Settings-agency", element: <SettingsPageAgency/>}
 ]
 
 export const agencyRoutingIconMap = {

@@ -95,7 +95,7 @@ export function DesignPreview() {
                 <div className="w-full h-full mx-auto">
                     <div className="relative w-full h-full overflow-hidden rounded-lg border">
                         <iframe ref={iframeRef} className={"w-full h-full"}
-                                src={window.location.href}></iframe>
+                                src={"https://gggiiia.github.io/ReviewHub"}></iframe>
                     </div>
                 </div>
             </CardContent>
