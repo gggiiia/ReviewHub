@@ -1,5 +1,6 @@
 import {type PropsWithChildren} from 'react';
-import {useIsDesktop} from "@/lib/hooks.ts";
+
+import {useIsDesktop} from "@/lib/hooks/useIsDesktop.tsx";
 
 
 /**

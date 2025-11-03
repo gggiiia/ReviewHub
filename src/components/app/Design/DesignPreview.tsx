@@ -1,11 +1,11 @@
 import {Card, CardContent, CardHeader} from "@/components/ui/card.tsx";
 import React, {useRef, useState} from "react";
-import useIframeCommunicator from "@/lib/hooks.ts";
 import {Input} from "@/components/ui/input.tsx";
 import {Label} from "@/components/ui/label.tsx";
 import ImageInput from "@/components/ui/image-input.tsx";
 import {Chromium, X} from "lucide-react";
 import {useForm} from "react-hook-form";
+import useIframeCommunicator from "@/lib/hooks/useIframeCommunicator.ts";
 
 interface DesignForm {
     logo: string

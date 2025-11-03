@@ -1,5 +1,6 @@
 import {type PropsWithChildren} from 'react';
-import {useIsDesktop} from "@/lib/hooks.ts";
+
+import {useIsDesktop} from "@/lib/hooks/useIsDesktop.tsx";
 
 /**
  * Component that renders its children only on mobile/tablet screens (< 1024px).

@@ -8,7 +8,8 @@ import {ThemeProvider} from "@/components/ui/theme/theme-provider.tsx";
 import {designActions, type DesignService, useDesign} from "@/services/DesignService.ts";
 import {useEffect} from "react";
 import {useRoutingState} from "@/services/RoutingState.ts";
-import {useIframeMessageListener} from "@/lib/hooks.ts";
+
+import {useIframeMessageListener} from "@/lib/hooks/useIframeMessageListener.tsx";
 
 function App() {
     const {theme} = useDesign()
