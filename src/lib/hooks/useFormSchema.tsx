@@ -9,7 +9,7 @@ type FieldSchema = {
     validator: ZodTypeAny;
 };
 
-export type Schema = Record<string, FieldSchema>;
+export type Schema<T> = Record<keyof T, FieldSchema>;
 
 export function useFormSchema<T extends Schema>(schema: T) {
     // Build a Zod object schema dynamically from validators
